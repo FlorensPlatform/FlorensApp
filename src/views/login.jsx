@@ -1,187 +1,277 @@
-import react,  {useContext, useState} from "react";
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import * as React from "react";
+import {Image, StyleSheet, Text, View} from "react-native";
 
-import { ImageBackground } from "react-native";
+const Login = () => {
+  	
+  	return (
+    		<View style={styles.login}>
+      			<Image style={styles.marcaUtpl2018011} resizeMode="cover" source="../../img/logo.png" />
+      			<Text style={[styles.ingreseSuContrasea1, styles.ingreseLayout]}>Ingrese su contraseña</Text>
+      			<Text style={[styles.idioma, styles.idiomaTypo]}>Idioma</Text>
+      			<Text style={[styles.usuario, styles.usuarioTypo]}>Usuario</Text>
+      			<Text style={[styles.bienvenidoDeNuevo1, styles.usuarioTypo]}>{`Bienvenido de nuevo
+`}</Text>
+            <Text style={[styles.contrasea, styles.usuarioTypo]}>Contraseña</Text>
+            <View style={styles.loginChild} />
+            <Text style={[styles.ingresar, styles.usuarioTypo]}>Ingresar</Text>
+            <View style={[styles.loginItem, styles.loginItemShadowBox]} />
+            <View style={styles.loginInner} />
+            <View style={[styles.rectangleView, styles.loginItemShadowBox]} />
+            <Text style={[styles.ingreseSuUsuario1, styles.ingreseLayout]}>Ingrese su usuario</Text>
+            <Text style={[styles.ingresaParaContinuar1, styles.idiomaTypo]}>Ingresa para continuar</Text>
+            <Text style={styles.noTienesCuentaContainer}>
+                <Text style={styles.noTienesCuenta1}>
+                    <Text style={styles.noTienesCuenta2}>No tienes cuenta,</Text>
+                </Text>
+                <Text style={styles.nursinghelpTypo}>
+                        <Text style={styles.noTienesCuenta1}>{` `}</Text>
+                    <Text style={styles.creaUnaNueva}>Crea una nueva cuenta</Text>
+                </Text>
+            </Text>
+            <Image style={styles.carbonuserAvatarFilledIcon} resizeMode="cover" source="../../img/user.png" />
+            <Image style={[styles.materialSymbolsmailOutlineIcon1, styles.outlineIconLayout]} resizeMode="cover" source="material-symbols:mail-outline.png" />
+            <Image style={[styles.mdipasswordOutlineIcon1, styles.outlineIconLayout]} resizeMode="cover" source="mdi:password-outline.png" />
+            <View style={[styles.loginChild1, styles.loginChildPosition]} />
+            <Text style={[styles.nursinghelp, styles.nursinghelpTypo]}>NursingHelp</Text>
+            <View style={[styles.loginChild2, styles.loginChildPosition]} />
+            <Image style={[styles.solararrowDownOutlineIcon1, styles.ingreseLayout]} resizeMode="cover" source="solar:arrow-down-outline.png" />
+            <Image style={styles.image13Icon} resizeMode="cover" source="image 13.png" />
+        </View>);
+};
 
-import { useNavigation } from "@react-navigation/native";
-import { AuthContext } from "../../context/AuthContext";
-import Spinner from 'react-native-loading-spinner-overlay';
-import {Colors  } from 'react-native/Libraries/NewAppScreen';
-const LoginScreen= ({route})=>{
-    const navigation = useNavigation();
-
-    const [username, setUsername] = useState(null);
-    const [password, setPassword] = useState(null);
-    const {isLoading, login} = useContext(AuthContext);
-    return(
-      
-        <View style={styles.container} >
-          <Spinner />
-          <View style={styles.PrimerCuadra} >
-            <Image
-              source={require('../../img/UTPL.png')}
-              style={{ width: 150, height: 50 }} // Ajusta el tamaño según tus necesidades
-            />
-            <Image
-              source={require('../../img/logo.png')}
-              style={{ width: 90, height: 100 }} // Ajusta el tamaño según tus necesidades
-            />
-          </View>
-            <View>
-                <Image style={styles.image}
-                    source={require('../../img/user.png')}></Image>
-                <Text style={styles.LetrasBien} > Bienvenido de nuevo</Text>
-                <Text style={styles.LetrasIngre} >Ingresa para continuar</Text>
-                <TextInput style={styles.txtInput} 
-                        value={username}
-                        placeholder="Ingrese su usuario"
-                        onChangeText={text => setUsername(text)}
-                        />
-                <TextInput secureTextEntry={true} style={styles.txtInput} 
-                        value={password}
-                        placeholder="Ingrese su contraseña"
-                        onChangeText={text => setPassword(text)}
-                        />               
-                <TouchableOpacity onPress={() =>{login(username, password)}}
-                    style={styles.colorBtn}>
-                <Text style={styles.colorTxtBtn}>Ingresar</Text>
-                </TouchableOpacity>  
-                <TouchableOpacity onPress={() => navigation.navigate('Registro')}
-                    style={styles.colorBtnRegistros}>
-                    <Text style={styles.colorTxtBtnRegistro}>Registrarse</Text>
-                </TouchableOpacity>
-                
-            </View>
-        </View>
-    )
-}
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+    ingreseLayout: {
+        height: 17,
+        position: "absolute"
     },
-    PrimerCuadra:{
-      flexDirection: 'row', justifyContent: 'space-between', padding: 20
+    idiomaTypo: {
+        fontSize: 15,
+        height: 17,
+        textAlign: "left",
+        color: "#002233",
+        fontFamily: "Inter-ExtraLight",
+        fontWeight: "200",
+        position: "absolute"
     },
-    image:{
-      width: 150, 
-      height: 150,
-      marginLeft: 80,
-        marginRight: 80,
+    usuarioTypo: {
+        height: 47,
+        fontFamily: "Inter-Bold",
+        fontWeight: "700",
+        textAlign: "left",
+        position: "absolute"
     },
-    LetrasBien:{
-      color: "#003F72",
-      fontSize: 25,
-      textAlign: 'center',
-    },
-    LetrasIngre:{
-      color: "#003F72",
-      textAlign: 'center',
-    },
-    backgroundImage: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
-        position: 'absolute',
-    
-    },
-    logo: {
-        width: 200,
-        height: 200, 
-        //position: 'absolute',
-        marginTop:30
-      },
-    logo2: {
-        width: 500,
-        height: 200, 
-        position: 'absolute',
-        marginTop:30
-      },
-      titulo:{
-          color:'#FF9116',
-          fontSize: 16,
-          marginTop: 20,
-        
-      },
-     
-      nombresyapellidos: {
-          color: '#000000',
-        fontSize: 16,
-        marginTop: 40,
-      
-        fontWeight: '600',
-        paddingLeft: 20,
-        borderBottomColor: '#000000',
-        borderBottomWidth: 0.5,
-        borderColor: '#000000',
-        paddingRight: 12,
-      }, 
-     
-      txtInput: {
-        fontSize: 16,
-        marginTop: 40,
-        fontWeight: '600',
-        padding: 10,
+    loginItemShadowBox: {
+        height: 64,
         borderWidth: 1,
-        borderBottomColor: '#003F72',
+        borderColor: "#003f72",
+        borderStyle: "solid",
+        shadowOpacity: 1,
+        elevation: 4,
+        shadowRadius: 4,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowColor: "rgba(0, 0, 0, 0.25)",
+        backgroundColor: "rgba(217, 217, 217, 0)",
+        width: 294,
         borderRadius: 10,
-        height: 50,
-      }, 
-     
-     
-      colorBtn: {
-        marginTop: 40,
-        borderColor: '#003F72',
-        backgroundColor: '#003F72',
-        padding: 15,
-        marginLeft: 20,
-        marginRight: 20,
+        left: 63,
+        position: "absolute"
+    },
+    outlineIconLayout: {
+        height: 24,
+        width: 24,
+        position: "absolute",
+        overflow: "hidden"
+    },
+    loginChildPosition: {
+        top: 80,
+        position: "absolute",
+        backgroundColor: "#fff"
+    },
+    nursinghelpTypo: {
+        fontFamily: "Inter-Bold",
+        fontWeight: "700"
+    },
+    marcaUtpl2018011: {
+        top: 34,
+        left: 24,
+        width: 104,
+        height: 42,
+        position: "absolute"
+    },
+    ingreseSuContrasea1: {
+        top: 599,
+        left: 78,
+        width: 252,
+        fontSize: 20,
+        height: 17,
+        textAlign: "left",
+        color: "#002233",
+        fontFamily: "Inter-ExtraLight",
+        fontWeight: "200"
+    },
+    idioma: {
+        left: 175,
+        width: 57,
+        top: 824
+    },
+    usuario: {
+        left: 114,
+        width: 181,
+        height: 47,
+        color: "#eaab00",
+        fontSize: 20,
+        top: 461
+    },
+    bienvenidoDeNuevo1: {
+        top: 359,
+        left: 82,
+        fontSize: 25,
+        color: "#003f72",
+        width: 292
+    },
+    contrasea: {
+        left: 109,
+        top: 571,
+        width: 181,
+        height: 47,
+        color: "#eaab00",
+        fontSize: 20
+    },
+    loginChild: {
+        top: 695,
+        backgroundColor: "#003f72",
+        height: 53,
+        width: 294,
         borderRadius: 10,
-        
-      },
-      colorBtnRegistros: {
-        marginTop: 25,
-      borderColor: '#F9F9F9',
-      backgroundColor: '#F9F9F9',
-      padding: 15,
-      marginLeft: 50,
-      marginRight: 50,
-      borderRadius: 80,
+        left: 63,
+        position: "absolute"
     },
-    colorTxtBtn: {
-      color: '#FFFFFF',
-      fontSize: 20,
-      textAlign: 'center',
+    ingresar: {
+        top: 705,
+        left: 162,
+        fontSize: 23,
+        color: "#fff",
+        width: 195
     },
-      colorTxtBtnRegistro: {
-        color: '#FF9116',
-        fontSize: 14,
-        textAlign: 'center',
-        width: 150,
-      },
-     
-      errorText: {
-        fontSize: 14,
-        color: 'red',
-        marginBottom: 20,
-        marginLeft: 20
-      },
-      modalView: {
-          margin: 20,
-          backgroundColor: "white",
-          borderRadius: 35,
-          padding: 35,
-          position: 'absolute', 
-          shadowColor: "#000",
-          
-          shadowOpacity: 0.25,
-         
-          elevation: 5,
-          
-          
-        }
-  });
+    loginItem: {
+        top: 457
+    },
+    loginInner: {
+        top: 813,
+        left: 167,
+        width: 89,
+        height: 38,
+        borderWidth: 1,
+        borderColor: "#003f72",
+        borderStyle: "solid",
+        shadowOpacity: 1,
+        elevation: 4,
+        shadowRadius: 4,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowColor: "rgba(0, 0, 0, 0.25)",
+        backgroundColor: "rgba(217, 217, 217, 0)",
+        borderRadius: 10,
+        position: "absolute"
+    },
+    rectangleView: {
+        top: 566
+    },
+    ingreseSuUsuario1: {
+        top: 487,
+        left: 80,
+        width: 252,
+        fontSize: 20,
+        height: 17,
+        textAlign: "left",
+        color: "#002233",
+        fontFamily: "Inter-ExtraLight",
+        fontWeight: "200"
+    },
+    ingresaParaContinuar1: {
+        top: 390,
+        left: 129,
+        width: 162
+    },
+    noTienesCuenta2: {
+        fontFamily: "Inter-ExtraLight",
+        fontWeight: "200"
+    },
+    noTienesCuenta1: {
+        color: "#002233"
+    },
+    creaUnaNueva: {
+        color: "#eaab00"
+    },
+    noTienesCuentaContainer: {
+        top: 767,
+        width: 321,
+        height: 31,
+        left: 63,
+        fontSize: 15,
+        textAlign: "left",
+        position: "absolute"
+    },
+    carbonuserAvatarFilledIcon: {
+        top: 153,
+        left: 116,
+        width: 192,
+        height: 201,
+        position: "absolute",
+        overflow: "hidden"
+    },
+    materialSymbolsmailOutlineIcon1: {
+        left: 80,
+        top: 461
+    },
+    mdipasswordOutlineIcon1: {
+        left: 77,
+        top: 571
+    },
+    loginChild1: {
+        left: 287,
+        width: 128,
+        height: 22
+    },
+    nursinghelp: {
+        top: 79,
+        left: 283,
+        fontSize: 22,
+        color: "#20d0ce",
+        textAlign: "left",
+        fontWeight: "700",
+        position: "absolute"
+    },
+    loginChild2: {
+        left: 277,
+        width: 141,
+        height: 40
+    },
+    solararrowDownOutlineIcon1: {
+        left: 232,
+        width: 17,
+        top: 824,
+        overflow: "hidden"
+    },
+    image13Icon: {
+        top: 8,
+        left: 302,
+        width: 109,
+        height: 100,
+        position: "absolute"
+    },
+    login: {
+        flex: 1,
+        width: "100%",
+        height: 926,
+        overflow: "hidden",
+        backgroundColor: "#fff"
+    }
+});
 
-export default LoginScreen
+export default Login;
