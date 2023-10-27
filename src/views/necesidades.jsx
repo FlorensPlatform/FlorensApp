@@ -57,7 +57,6 @@ const Necesidades = ({router}) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'center',
       padding: 16,
       backgroundColor: '#FFFFFF',
     },
@@ -72,13 +71,11 @@ const styles = StyleSheet.create({
     },
     item: {
       backgroundColor: '#FFFFFFB3',
-      padding: 20,
-      borderRadius: 8,
+      padding: 5,
       justifyContent: 'center',
       alignItems: 'center',
       width: '30%',
       borderColor: '#003F72',
-      borderWidth: 1,
     },
     title: {
       fontSize: 10,

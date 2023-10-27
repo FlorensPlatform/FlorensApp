@@ -54,41 +54,37 @@ const Patrones = ({router}) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      padding: 16,
-      backgroundColor: '#FFFFFF',
-    },
-    Image:{
-        width: 60, 
-        height: 60,
-    },
-    row: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginBottom: 16,
-    },
-    item: {
-      backgroundColor: '#FFFFFFB3',
-      padding: 20,
-      borderRadius: 8,
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: '30%',
-      borderColor: '#003F72',
-      borderWidth: 1,
-    },
-    title: {
-      fontSize: 10,
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#FFFFFF',
+  },
+  Image:{
+      width: 60, 
+      height: 60,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  item: {
+    backgroundColor: '#FFFFFFB3',
+    padding: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '30%',
+    borderColor: '#003F72',
+  },
+  title: {
+    fontSize: 10,
+    color: '#003F72',
+  },
+  textoBien: {
       color: '#003F72',
-    },
-    textoBien: {
-        color: '#003F72',
-        fontSize: 15,
-        textAlign: 'center',
-        fontWeight: 'bold'
-    },
-  });
-
+      fontSize: 15,
+      textAlign: 'center',
+      fontWeight: 'bold'
+  },
+});
 export default Patrones;

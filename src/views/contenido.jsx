@@ -17,74 +17,80 @@ const Contenido = ({route}) => {
 					source={require('../../img/logo.png')}
 					style={{ width: 60, height: 70 }}
 				/>
-				<Text style={styles.colorTxtLogo}>Bienvenido a Florens</Text>
+				<Text style={styles.colorTxtLogo}>Bienvenido a {"\n"} Florens</Text>
 			</View>
 			<Text style={styles.textoBien} >Contenido</Text>
-			<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
-				<View>
-					<TouchableOpacity onPress={() => navigation.navigate('Necesidades')}
-					style={styles.colorBtn}>
-						<Text style={styles.colorTxtBtn}>Necesidades Básicas</Text>
-					</TouchableOpacity>
-					
+			<View style={styles.Contenedor}>
+				<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+					<View>
+						<TouchableOpacity onPress={() => navigation.navigate('Necesidades')}
+						style={styles.colorBtn}>
+							<Text style={styles.colorTxtBtn}>Necesidades Básicas</Text>
+						</TouchableOpacity>
+						
+					</View>
+					<Image
+						source={require('../../img/Henderson.png')}
+						style={{ width: 50, height: 60 }}
+					/>
 				</View>
-				<Image
-					source={require('../../img/Henderson.png')}
-					style={{ width: 50, height: 60 }}
-				/>
-			</View>
-			<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
-				<View>
-					<TouchableOpacity onPress={() => navigation.navigate('Patrones')}
-					style={styles.colorBtn}>
-						<Text style={styles.colorTxtBtn}>Patrones Funcionales</Text>
-					</TouchableOpacity>
-					
+				<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+					<View>
+						<TouchableOpacity onPress={() => navigation.navigate('Patrones')}
+						style={styles.colorBtn}>
+							<Text style={styles.colorTxtBtn}>Patrones Funcionales</Text>
+						</TouchableOpacity>
+						
+					</View>
+					<Image
+						source={require('../../img/Gordon.png')}
+						style={{ width: 50, height: 60 }}
+					/>
 				</View>
-				<Image
-					source={require('../../img/Gordon.png')}
-					style={{ width: 50, height: 60 }}
-				/>
-			</View>
-			<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
-				<View>
-					<TouchableOpacity onPress={() => navigation.navigate('Dominios')}
-					style={styles.colorBtn}>
-						<Text style={styles.colorTxtBtn}>Dominios de NANDA</Text>
-					</TouchableOpacity>
-					
+				<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+					<View>
+						<TouchableOpacity onPress={() => navigation.navigate('Dominios')}
+						style={styles.colorBtn}>
+							<Text style={styles.colorTxtBtn}>Dominios de NANDA</Text>
+						</TouchableOpacity>
+						
+					</View>
+					<Image
+						source={require('../../img/Nanda.png')}
+						style={{ width: 50, height: 60 }}
+					/>
 				</View>
-				<Image
-					source={require('../../img/Nanda.png')}
-					style={{ width: 50, height: 60 }}
-				/>
-			</View>
-			<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
-				<View>
-					<TouchableOpacity
-					style={styles.colorBtn}>
-						<Text style={styles.colorTxtBtn}>Tutor Automatizado</Text>
-					</TouchableOpacity>
-					
+				<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+					<View>
+						<TouchableOpacity
+						style={styles.colorBtn}>
+							<Text style={styles.colorTxtBtn}>Tutor Automatizado</Text>
+						</TouchableOpacity>
+						
+					</View>
+					<Image
+						source={require('../../img/tutor.png')}
+						style={{ width: 40, height: 60}}
+					/>
 				</View>
-				<Image
-					source={require('../../img/tutor.png')}
-					style={{ width: 50, height: 60 }}
-				/>
 			</View>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
+	Contenedor:{
+		marginRight:250
+	},
+	btnImagen:{
+		
+	},
 	container: {
-		flex: 1,
-		backgroundColor: "white",
+		backgroundColor: "#FFFFFF",
 		alignItems: 'center',
 		justifyContent: 'center',
 	  },
 	  containerPrin: {
-		
 		backgroundColor: "white",
 		alignItems: 'rigth',
 	  },
@@ -93,7 +99,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'right',
 		resizeMode: 'contain',
 		right: 100,
-		marginLeft:30
+		marginLeft:30,
+		marginTop: 20
 	  },
 	  textoBien: {
 		  color: '#003F72',
@@ -106,21 +113,24 @@ const styles = StyleSheet.create({
         borderColor: '#003F72',
         backgroundColor: '#003F72',
         padding: 20,
-        marginLeft: 5,
+        marginLeft: 50,
         marginRight: 5,
-        borderRadius: 10,
+        borderRadius: 80,
     },
 	colorTxtBtn: {
         color: '#FFFFFF',
         fontSize: 16,
         textAlign: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+		paddingLeft:60,
+		paddingRight: 20
       },
 	colorTxtLogo: {
         color: '#003F72',
         fontSize: 25,
         textAlign: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+		marginTop:15
       },
 
 });

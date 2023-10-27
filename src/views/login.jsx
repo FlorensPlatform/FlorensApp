@@ -1,16 +1,26 @@
 import react,  {useContext, useState} from "react";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Modal } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../../context/AuthContext";
+import {ModalPicker} from "../../Componets/ModelPicker"
 //import { style } from "../styles/styles";
 import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/FontAwesome';
 const Login = ({route}) => {
     const navigation = useNavigation();
     //const styles = style();
+    const [chooseData, setchoosedata] = useState("Idioma...");
+    const [isModalVisible, setisModalVisible] = useState(false);
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
     const {isLoading, login} = useContext(AuthContext);
+
+    const changeModalVisibility = (bool) =>{
+        setisModalVisible(bool)
+    }
+    const setData = (option) => {
+        setchoosedata(option)
+    }
   	return (
         <View style={styles.container}>
             <Spinner />
@@ -61,7 +71,26 @@ const Login = ({route}) => {
                     <TouchableOpacity onPress={() => navigation.navigate('Registro')}>
                         <Text style={styles.colorTxtBtnRegistro}>Crea una cuenta nueva</Text>
                     </TouchableOpacity>
-                </View> 
+                </View>
+          
+          
+          <TouchableOpacity style={styles.btnStar} 
+                onPress = {() => changeModalVisibility(true)} >
+                <Text style={styles.textItem}>
+                    {chooseData}
+                </Text>
+            </TouchableOpacity>
+            <Modal
+                transparent = {true}
+                animationType = "fade"
+                visible = {isModalVisible}
+                nRequestClose={()=> changeModalVisibility(false)}
+            >
+            <ModalPicker
+                changeModalVisibility={changeModalVisibility}
+                setData = {setData}
+            />
+            </Modal> 
             </View>
         </View>
     )
@@ -136,6 +165,19 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginLeft: 20
       },
+    btnStar: {
+        marginTop: 20,
+        borderColor: '#003F72',
+        padding: 5,
+        marginLeft: 100,
+        marginRight: 100,
+        borderRadius: 10,
+        borderWidth:1
+    },
+    textItem:{
+        fontSize:20,
+        color: '#003F72'
+    },
   });
 
 export default Login;
