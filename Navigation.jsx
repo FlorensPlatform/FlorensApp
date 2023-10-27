@@ -6,7 +6,8 @@ import { AuthContext } from "./context/AuthContext";
 
 //views
 import LoginScreen from "./src/views/login";
-
+import RegisScreen from "./src/views/registro";
+import ContenidoScreen from "./src/views/contenido";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -18,8 +19,8 @@ const {isLoading, login, userInfo} = useContext(AuthContext);
         initialRouteName="LoginScreen" 
         screenOptions={{
           headerMode: 'screen',
-          headerTintColor: 'black',
-          headerStyle: { backgroundColor: '#ff9116' },
+          headerTintColor: 'White',
+          headerStyle: { backgroundColor: '#003F72' },
         }}
       >
         <Stack.Screen 
@@ -28,6 +29,8 @@ const {isLoading, login, userInfo} = useContext(AuthContext);
           options={{headerShown:false}} 
         />
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Registro" component={RegisScreen} />
+        <Stack.Screen name="Contenido" component={ContenidoScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
