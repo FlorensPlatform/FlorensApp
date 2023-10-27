@@ -6,6 +6,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 const Contenido = ({route}) => {
   	
+	const navigation = useNavigation();
   	return (
 		<View style={styles.container}>
 			<Spinner />
@@ -21,7 +22,7 @@ const Contenido = ({route}) => {
 			<Text style={styles.textoBien} >Contenido</Text>
 			<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
 				<View>
-					<TouchableOpacity
+					<TouchableOpacity onPress={() => navigation.navigate('Necesidades')}
 					style={styles.colorBtn}>
 						<Text style={styles.colorTxtBtn}>Necesidades Básicas</Text>
 					</TouchableOpacity>
@@ -34,7 +35,7 @@ const Contenido = ({route}) => {
 			</View>
 			<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
 				<View>
-					<TouchableOpacity
+					<TouchableOpacity onPress={() => navigation.navigate('Patrones')}
 					style={styles.colorBtn}>
 						<Text style={styles.colorTxtBtn}>Patrones Funcionales</Text>
 					</TouchableOpacity>
@@ -47,7 +48,7 @@ const Contenido = ({route}) => {
 			</View>
 			<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
 				<View>
-					<TouchableOpacity
+					<TouchableOpacity onPress={() => navigation.navigate('Dominios')}
 					style={styles.colorBtn}>
 						<Text style={styles.colorTxtBtn}>Dominios de NANDA</Text>
 					</TouchableOpacity>
