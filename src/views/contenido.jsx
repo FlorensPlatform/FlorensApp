@@ -80,7 +80,8 @@ const Contenido = ({route}) => {
 
 const styles = StyleSheet.create({
 	Contenedor:{
-		marginRight:250
+		marginRight:100,
+		marginLeft:-80
 	},
 	btnImagen:{
 		
