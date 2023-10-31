@@ -83,17 +83,10 @@ const styles = StyleSheet.create({
 		marginRight:100,
 		marginLeft:-80
 	},
-	btnImagen:{
-		
-	},
 	container: {
 		backgroundColor: "#FFFFFF",
 		alignItems: 'center',
 		justifyContent: 'center',
-	  },
-	  containerPrin: {
-		backgroundColor: "white",
-		alignItems: 'rigth',
 	  },
 	  Image:{
 		width: 120, height: 50, 

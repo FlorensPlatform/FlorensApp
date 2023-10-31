@@ -20,7 +20,7 @@ const DATA = [
 	{ id: '13', title: 'Desarrollo',url:'../../img/n1.png' }
     // Agrega más elementos según sea necesario
   ];
-  const Item = ({ title, key }) => (
+  const Item = ({ key, title, navigation }) => (
     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('DesDominios')}>
         <Text style={styles.title}>{key}</Text>
         <Image style={styles.Image}
@@ -32,7 +32,7 @@ const Dominios = ({router}) => {
     const navigation = useNavigation();
     const renderItems = () => {
         return DATA.map(item => (
-          <Item key={item.id} title={item.title} url1={item.url} />
+          <Item key={item.id} title={item.title} navigation={navigation} />
         ));
       };
   	return (

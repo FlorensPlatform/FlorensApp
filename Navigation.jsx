@@ -22,7 +22,7 @@ const {isLoading, login, userInfo} = useContext(AuthContext);
   return (
     <NavigationContainer ref={navigationRef}>      
       <Stack.Navigator 
-        initialRouteName="LoginScreen" 
+        initialRouteName="DesPatronesScreen" 
         screenOptions={{
           headerMode: 'screen',
           headerTintColor: 'White',
