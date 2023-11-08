@@ -48,10 +48,13 @@ const {isLoading, login, userInfo} = useContext(AuthContext);
 }
 function TabNavigator() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{
+      tabBarStyle: { backgroundColor: '#003F72' },
+    }}>
       <Stack.Screen name="Necesidades" component={NecesidadesScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Patrones" component={PatronesScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Dominios" component={DominiosScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="Tutor" component={DominiosScreen} options={{headerShown:false}}/>
     </Tab.Navigator>
   );
 }

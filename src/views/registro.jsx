@@ -95,9 +95,9 @@ const Registro = ({route}) => {
                 </TouchableOpacity>
                 <Text> </Text>
                 <View style={styles.IconText}>
-                    <Text>No tienes cuenta,</Text>
+                    <Text>Ya tienes cuenta,</Text>
                     <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                        <Text style={styles.colorTxtBtnRegistro}>Crea una cuenta nueva</Text>
+                        <Text style={styles.colorTxtBtnRegistro}>Ingresa</Text>
                     </TouchableOpacity>
                 </View> 
             </View>
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
         color: '#FF9116',
         fontSize: 14,
         textAlign: 'center',
-        width: 150,
+        width: 200,
       },
       errorText: {
         fontSize: 14,
