@@ -21,7 +21,7 @@ const Contenido = ({route}) => {
 			</View>
 			<Text style={styles.textoBien} >Contenido</Text>
 			<View style={styles.Contenedor}>
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+				<View style={styles.BotonesContenedor}>
 					<View>
 						<TouchableOpacity onPress={() => navigation.navigate('Necesidades')}
 						style={styles.colorBtn}>
@@ -31,10 +31,10 @@ const Contenido = ({route}) => {
 					</View>
 					<Image
 						source={require('../../img/Henderson.png')}
-						style={{ width: 50, height: 60 }}
+						style={{ width: 65, height: 60 }}
 					/>
 				</View>
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+				<View style={styles.BotonesContenedor}>
 					<View>
 						<TouchableOpacity onPress={() => navigation.navigate('Patrones')}
 						style={styles.colorBtn}>
@@ -47,7 +47,7 @@ const Contenido = ({route}) => {
 						style={{ width: 50, height: 60 }}
 					/>
 				</View>
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+				<View style={styles.BotonesContenedor}>
 					<View>
 						<TouchableOpacity onPress={() => navigation.navigate('Dominios')}
 						style={styles.colorBtn}>
@@ -60,7 +60,7 @@ const Contenido = ({route}) => {
 						style={{ width: 50, height: 60 }}
 					/>
 				</View>
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+				<View style={styles.BotonesContenedor}>
 					<View>
 						<TouchableOpacity
 						style={styles.colorBtn}>
@@ -81,7 +81,11 @@ const Contenido = ({route}) => {
 const styles = StyleSheet.create({
 	Contenedor:{
 		marginRight:100,
-		marginLeft:-80
+		marginLeft:-80,
+		paddingTop: 20
+	},
+	BotonesContenedor:{
+		flexDirection: 'row', justifyContent: 'space-between', padding: 30
 	},
 	container: {
 		backgroundColor: "#FFFFFF",
@@ -100,7 +104,8 @@ const styles = StyleSheet.create({
 		  color: '#003F72',
 		  fontSize: 25,
 		  textAlign: 'center',
-		  fontWeight: 'bold'
+		  fontWeight: 'bold',
+		  paddingTop: 30
 	  },
 	  colorBtn: {
         marginTop: 15,
