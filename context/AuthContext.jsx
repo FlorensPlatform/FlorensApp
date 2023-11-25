@@ -36,14 +36,6 @@ function useCounter() {
         { text: "OK", onPress: () => console.log("OK Pressed") }
       ]
   )};
-  function reservaGeneradaExito (){
-    Alert.alert(
-      "Aviso",
-      "Su reserva ha sido generada con éxito",
-      [
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-      ]
-  )};
 
 export const AuthProvider = ({children}) => {
     
@@ -51,10 +43,10 @@ export const AuthProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(false);
     const navigation = props => (useNavigation());
     // Registro
-    const register = (Identificacion, Nombres, Apellidos, Direccion, Email, username, password, Precio, FechaInRes, FechaFinRes, IdHabitaciones, NumPersonas, idCliente) =>{
+    const register = (nombre, pais, ciudad, email, universidad, password) =>{
         setIsLoading(true);
-        axios.post(`${BASE_URL}/cliente`,{
-            Identificacion, Nombres, Apellidos, Direccion, Email, username, password
+        axios.post(`${BASE_URL}/Registro`,{
+            nombre, pais, ciudad, email, universidad, password
         }).then(res => {
             let userInfo = res.data;
             setUserInfo(userInfo);
@@ -62,10 +54,7 @@ export const AuthProvider = ({children}) => {
             setIsLoading(false);
             if (usuario!=null){
                 console.log("mi usuario", usuario);
-                //useCounter();
-                //navigation.navigate('Cuenta creada');
-                //RootNavigation.navigate('Cuenta creada');
-                RootNavigation.navigate('Login',Precio, FechaInRes, FechaFinRes, IdHabitaciones, NumPersonas,idCliente);
+                RootNavigation.navigate('Login');
             }
         }).catch(e =>{
             createTwoButtonAlertRegistro();
@@ -74,38 +63,12 @@ export const AuthProvider = ({children}) => {
         })
     };
 
-    //Reserva
-    const registerReserva = (idCliente,fechaIngreso, fechaSalida, Habitacion, montoTotal, cantidadPersonas) =>{
-        setIsLoading(true);
-        console.log(typeof(idCliente)+"--"+typeof(fechaIngreso)+"--"+typeof(FechaSalida)+"--"+typeof(Habitacion)+"--"+typeof(montoTotal)+"--"+typeof(cantidadPersonas))
-        axios.post(`${RES_URL}/v1/reserva/habitacion/`+Habitacion,{
-            idCliente, fechaIngreso, fechaSalida, Habitacion, montoTotal, cantidadPersonas
-        }).then(res => {
-            let userInfo = res.data;
-            //console.log(idCliente+"--"+FechaIngreso+"--"+FechaSalida+"--"+Habitacion+"--"+montoTotal+"--"+cantidadPersonas)
-            setUserInfo(userInfo);
-            const usuario = AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
-            setIsLoading(false);
-            if (usuario!=null){
-                console.log("mi usuario", usuario);
-                reservaGeneradaExito();
-                //useCounter();
-                //navigation.navigate('Cuenta creada');
-                //RootNavigation.navigate('Cuenta creada');
-                RootNavigation.navigate('Realizar pago');
-            }
-        }).catch(e =>{
-            
-            console.log(`error en la reserva ${e}`);
-            setIsLoading(false);
-        })
-    };
     // Login
-    const login = (username, password,PrecioValor, Fechain,Fechafin,HabitacionId,Personas,idCliente) =>{
+    const login = (email, password) =>{
         setIsLoading(true);
         axios.post(`${BASE_URL}/v1/auth/signin`,{
-            username,
-             password
+            email,
+            password
         }).then(res => {
             let userInfo = res.data;
             console.log(userInfo.user_id);
@@ -113,10 +76,9 @@ export const AuthProvider = ({children}) => {
             const token = AsyncStorage.setItem('userInfo', JSON.stringify(userInfo))
             if (token!=null){
                 console.log("mi token", token);
-                console.log(PrecioValor);
                 useCounter();
                 //navigation.navigate('Cuenta creada');Cuenta creada
-                RootNavigation.navigate('Confirmar reserva',PrecioValor, Fechain,Fechafin,HabitacionId,Personas,userInfo.user_id);
+                RootNavigation.navigate('Confirmar reserva');
             }
             setIsLoading(false);
 
@@ -136,8 +98,7 @@ export const AuthProvider = ({children}) => {
                 isLoading,
                 userInfo,
                 login,
-                register,
-                registerReserva
+                register
             }}>
             {children}
         </AuthContext.Provider>

@@ -6,16 +6,16 @@ import Spinner from 'react-native-loading-spinner-overlay';
 const Registro = ({route}) => {
 	const navigation = useNavigation();
 
-	const [Nombres, setNombres] = useState(null);
-	const [Pais, setPais] = useState(null);
-	const [Ciudad, setCiudad] = useState(null);
-	const [Email, setEmail] = useState(null);
-	const [Universidad, setuniversidad] = useState(null);
+	const [nombre, setNombres] = useState(null);
+	const [pais, setPais] = useState(null);
+	const [ciudad, setCiudad] = useState(null);
+	const [email, setEmail] = useState(null);
+	const [universidad, setuniversidad] = useState(null);
 	const [password, setpassword] = useState(null);
 	const {isLoading, register} = useContext(AuthContext);
   	return (
 		<View style={styles.container}>
-			<Spinner />
+			<Spinner visible={isLoading}/>
             <View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                     <Image
@@ -34,9 +34,9 @@ const Registro = ({route}) => {
                         <Text style={styles.TextoUsuario} >Nombre</Text>
                     </View>
                     <TextInput  
-                        value={Nombres}
+                        value={nombre}
                         placeholder="Ingrese su nombre"
-                        onChangeText={text => setUsername(text)}
+                        onChangeText={text => setNombres(text)}
                         />
                 </View>
 				<View style={styles.txtInput}>
@@ -44,9 +44,9 @@ const Registro = ({route}) => {
                         <Text style={styles.TextoUsuario} >Pais</Text>
                     </View>
                     <TextInput  
-                        value={Pais}
+                        value={pais}
                         placeholder="Ingrese su pais"
-                        onChangeText={text => setUsername(text)}
+                        onChangeText={text => setPais(text)}
                         />
                 </View>
 				<View style={styles.txtInput}>
@@ -54,9 +54,9 @@ const Registro = ({route}) => {
                         <Text style={styles.TextoUsuario} >Ciudad</Text>
                     </View>
                     <TextInput  
-                        value={Ciudad}
+                        value={ciudad}
                         placeholder="Ingrese su ciudad"
-                        onChangeText={text => setUsername(text)}
+                        onChangeText={text => setCiudad(text)}
                         />
                 </View>
 				<View style={styles.txtInput}>
@@ -64,9 +64,9 @@ const Registro = ({route}) => {
                         <Text style={styles.TextoUsuario} >E-mail (Usuario)</Text>
                     </View>
                     <TextInput  
-                        value={Email}
+                        value={email}
                         placeholder="Ingrese su E-mail"
-                        onChangeText={text => setUsername(text)}
+                        onChangeText={text => setEmail(text)}
                         />
                 </View>
 				<View style={styles.txtInput}>
@@ -74,9 +74,9 @@ const Registro = ({route}) => {
                         <Text style={styles.TextoUsuario} >Universidad</Text>
                     </View>
                     <TextInput  
-                        value={Universidad}
+                        value={universidad}
                         placeholder="Ingrese su universidad"
-                        onChangeText={text => setUsername(text)}
+                        onChangeText={text => setuniversidad(text)}
                         />
                 </View>
 				<View style={styles.txtInput}>
@@ -86,10 +86,10 @@ const Registro = ({route}) => {
                     <TextInput secureTextEntry={true} 
                         value={password}
                         placeholder="Ingrese su contraseña"
-                        onChangeText={text => setPassword(text)}
+                        onChangeText={text => setpassword(text)}
                         />
                 </View>
-                <TouchableOpacity
+                <TouchableOpacity onPress={() =>{register(nombre, pais, ciudad, email, universidad, password)}}
                     style={styles.colorBtn}>
                 <Text style={styles.colorTxtBtn}>Registro</Text>
                 </TouchableOpacity>
