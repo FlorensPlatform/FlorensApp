@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/FontAwesome';
 const DATA = [
-    { id: '1', title: 'Respirar', url:'../../img/n1.png'},
+    { id: '1', title: 'Respirar Normalmente', url:'../../img/n1.png'},
     { id: '2', title: 'Beber',url:'../../img/n1.png' },
     { id: '3', title: 'Eliminar',url:'../../img/n1.png' },
     { id: '4', title: 'Moverse',url:'../../img/n1.png' },

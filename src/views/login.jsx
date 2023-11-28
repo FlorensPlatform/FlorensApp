@@ -41,7 +41,7 @@ const Login = ({route}) => {
                 <Text style={styles.TextoIngr} >Ingresa para continuar</Text>
                 <View style={styles.txtInput}>
                     <View style={styles.IconText}>
-                        <Icon name="mail" size={20} color="#EAAB00" />
+                        
                         <Text style={styles.TextoUsuario} >Usuario</Text>
                     </View>
                     <TextInput  
@@ -52,7 +52,7 @@ const Login = ({route}) => {
                 </View>
                 <View style={styles.txtInput}>
                     <View style={styles.IconText}>
-                        <Icon name="password" size={20} color="#EAAB00" />
+                        
                         <Text style={styles.TextoUsuario} >Contraseña</Text>
                     </View>
                     <TextInput secureTextEntry={true} 
@@ -61,7 +61,7 @@ const Login = ({route}) => {
                         onChangeText={text => setPassword(text)}
                         />
                 </View>
-                <TouchableOpacity onPress={() => navigation.navigate('Contenido')}
+                <TouchableOpacity onPress={()=>{login(username, password)}}
                     style={styles.colorBtn}>
                 <Text style={styles.colorTxtBtn}>Ingresar</Text>
                 </TouchableOpacity>

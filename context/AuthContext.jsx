@@ -66,19 +66,18 @@ export const AuthProvider = ({children}) => {
     // Login
     const login = (email, password) =>{
         setIsLoading(true);
-        axios.post(`${BASE_URL}/v1/auth/signin`,{
+        axios.post(`${BASE_URL}/verificar_usuario`,{
             email,
             password
         }).then(res => {
             let userInfo = res.data;
-            console.log(userInfo.user_id);
+            console.log(userInfo.status);
             setUserInfo(userInfo);
             const token = AsyncStorage.setItem('userInfo', JSON.stringify(userInfo))
-            if (token!=null){
+            if (userInfo.status){
                 console.log("mi token", token);
-                useCounter();
                 //navigation.navigate('Cuenta creada');Cuenta creada
-                RootNavigation.navigate('Confirmar reserva');
+                RootNavigation.navigate('Contenido');
             }
             setIsLoading(false);
 
