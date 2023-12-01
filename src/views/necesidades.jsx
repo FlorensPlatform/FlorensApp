@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     padding: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '30%',
+    width: '40%',
     borderColor: '#003F72',
   },
   title: {
