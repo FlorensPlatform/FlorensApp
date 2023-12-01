@@ -84,7 +84,7 @@ function TabNavigator() {
         tabBarIcon: ({ focused, color, size }) => (
           <Image
             source={focused ? require('./img/tutor_logo_1.png') : require('./img/tutor_logo.png')}
-            style={{ width: 50, height: 50 }}
+            style={{ width: 40, height: 40 }}
           />
         ),}}/>
     </Tab.Navigator>
@@ -95,11 +95,11 @@ const CustomHeader = () => {
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       <Image
         source={require('./img/UTPL.png')}
-        style={{ width: 80, height: 30, marginRight: 10 }}
+        style={{ width: 80, height: 30, marginRight: 20 }}
       />
-      <Text style={{ fontSize: 20, fontWeight: 'bold',color:"#FFFFFF", paddingLeft:60 }}>Florens</Text>
+      <Text style={{ fontSize: 20, fontWeight: 'bold',color:"#FFFFFF", paddingLeft:10 }}>Florens</Text>
 
-      <TouchableOpacity style={{  paddingLeft:130}}>
+      <TouchableOpacity style={{  paddingLeft:50}}>
           <Text style={{ fontSize: 15, fontWeight: 'bold',color:"#EAAB00" }}>Salir</Text>
       </TouchableOpacity>
     </View>

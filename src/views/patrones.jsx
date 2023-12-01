@@ -1,38 +1,38 @@
-import react,  {useContext, useState} from "react";
+import React,  {useContext, useState, useEffect} from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, SafeAreaView } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-import { AuthContext } from "../../context/AuthContext";
+import { BASE_URL } from '../config';
 import Spinner from 'react-native-loading-spinner-overlay';
-import Icon from 'react-native-vector-icons/FontAwesome';
-const DATA = [
-    { id: '1', title: 'Percepción', url:'../../img/n1.png'},
-    { id: '2', title: 'Nutricional',url:'../../img/n1.png' },
-    { id: '3', title: 'Eliminación',url:'../../img/n1.png' },
-    { id: '4', title: 'Actividad',url:'../../img/n1.png' },
-    { id: '5', title: 'Descanso',url:'../../img/n1.png' },
-    { id: '6', title: 'Congnitivo' ,url:'../../img/n1.png'},
-    { id: '7', title: 'Autoconcepto',url:'../../img/n1.png' },
-    { id: '8', title: 'Relaciones',url:'../../img/n1.png' },
-    { id: '9', title: 'Sexualidad',url:'../../img/n1.png' },
-    { id: '10', title: 'Adaptación',url:'../../img/n1.png' },
-    { id: '11', title: 'Valores',url:'../../img/n1.png' }
-    // Agrega más elementos según sea necesario
-  ];
-  const Item = ({ title, key, navigation }) => (
-    <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('DesPatrones')}>
-        <Text style={styles.title}>{key}</Text>
-        <Image style={styles.Image}
-				source={require('../../img/n1.png')}></Image>
-      <Text style={styles.title}>{title}</Text>
-    </TouchableOpacity>
-  );
-const Patrones = ({router}) => {
+import axios from 'axios';
+
+const Patrones = () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+    
+    useEffect(() => {
+      fetchData();
+    }, []);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/DocumentsPatro`);
+        setData(response.data);
+      } catch (error) {
+        console.error('Error al obtener datos de la API:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
     const navigation = useNavigation();
     const renderItems = () => {
-        return DATA.map(item => (
-          <Item key={item.id} title={item.title} navigation={navigation} />
-        ));
-      };
+      return data.map(item => (
+        <TouchableOpacity style={styles.item} key={item.id} onPress={() => navigation.navigate('DesPatrones',{Document:item.nombre})}>
+          <Text style={styles.title}>{item.id}</Text>
+          <Image style={styles.Image} source={require('../../img/n1.png')}></Image>
+          <Text style={styles.title}>{item.id}</Text>
+        </TouchableOpacity>
+      ));
+    };
+
   	return (
         <SafeAreaView style={styles.container}>
 			<Spinner />
@@ -47,7 +47,7 @@ const Patrones = ({router}) => {
                 {renderItems().slice(6, 9)}
             </View>
             <View style={styles.row}>
-                {renderItems().slice(9, 12)}
+                {renderItems().slice(9, 11)}
             </View>
         </SafeAreaView>
     );

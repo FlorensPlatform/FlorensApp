@@ -1,10 +1,33 @@
+import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
+import { BASE_URL } from '../config';
 import Spinner from 'react-native-loading-spinner-overlay';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const DesNecesidades = ({route}) => {
+	const [data, setData] = useState([]);
 	const navigation = useNavigation();
+	const {Document} = route.params;
+
+	useEffect(() => {
+		fetchData();
+	  }, []);
+	
+	  const fetchData = async () => {
+		try {
+			console.log(Document);
+		  const response = await axios.post(`${BASE_URL}/DocNecesidadesInfo`, {
+			Document
+		  });
+		  setData(response.data);
+		  console.log(response.data)
+		} catch (error) {
+		  console.error('Error al obtener datos de la API:', error);
+		} finally {
+		  setIsLoading(false);
+		}
+	  };
   	return (
 		<View style={styles.container}>
 			<Spinner />
@@ -14,9 +37,9 @@ const DesNecesidades = ({route}) => {
 					source={require('../../img/Nanda.png')}
 					style={{ width: 60, height: 70 }}
 				/>
-				<Text style={styles.colorTxtLogo}>  1. Respirar Normalmente</Text>
+				<Text style={styles.colorTxtLogo}>{data.Title}</Text>
 			</View>
-			<Text style={styles.txtArea} >Capacidad de la persona para mantener el intercambio gaseoso con niveles suficientes de oxigenación</Text>
+			<Text style={styles.txtArea} >Hola Mundo</Text>
 			<View style={styles.Contenedor}>
 				<TouchableOpacity
 					style={styles.colorBtn}>

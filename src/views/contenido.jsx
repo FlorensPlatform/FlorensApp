@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
 		paddingTop: 20
 	},
 	BotonesContenedor:{
-		flexDirection: 'row', justifyContent: 'space-between', padding: 30
+		flexDirection: 'row', justifyContent: 'space-between', padding: 15
 	},
 	container: {
 		backgroundColor: "#FFFFFF",

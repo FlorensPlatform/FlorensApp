@@ -1,10 +1,33 @@
+import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import Spinner from 'react-native-loading-spinner-overlay';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import axios from 'axios';
+import { BASE_URL } from '../config';
 
-const DesPatrones = () => {
+const DesPatrones = ({route}) => {
+	const [data, setData] = useState([]);
 	const navigation = useNavigation();
+	const {Document} = route.params;
+
+	useEffect(() => {
+		fetchData();
+	  }, []);
+	
+	  const fetchData = async () => {
+		try {
+			console.log(Document);
+		  const response = await axios.post(`${BASE_URL}/DocPatronesInfo`, {
+			Document
+		  });
+		  setData(response.data);
+		  console.log(response.data)
+		} catch (error) {
+		  console.error('Error al obtener datos de la API:', error);
+		} finally {
+		  setIsLoading(false);
+		}
+	  };
 	return (
 	  <View style={styles.container}>
 		  <Spinner />
@@ -14,9 +37,9 @@ const DesPatrones = () => {
 					source={require('../../img/Nanda.png')}
 					style={{ width: 60, height: 70 }}
 				/>
-				<Text style={styles.colorTxtLogo}>1. Percepción – manejo de salud</Text>
+				<Text style={styles.colorTxtLogo}>{data.Title}</Text>
 			</View>
-			  <Text style={styles.txtArea} >Se refiere a la percepción que tiene el individuo de su estado de salud y su capacidad para controlar y manejar su propia salud</Text>
+			  <Text style={styles.txtArea} >Hola Mundo</Text>
 			  <View style={styles.Contenedor}>
 				<TouchableOpacity
 					style={styles.colorBtn}>
