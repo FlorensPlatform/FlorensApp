@@ -76,10 +76,10 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: '#FFFFFFB3',
-    padding: 2,
+    padding: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '40%',
+    width: '30%',
     borderColor: '#003F72',
   },
   title: {
