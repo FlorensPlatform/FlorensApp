@@ -3,7 +3,6 @@ import axios from 'axios';
 import React, {createContext, useEffect, useState} from 'react';
 import { Alert} from 'react-native';
 import { BASE_URL } from '../src/config';
-import { RES_URL } from '../src/config';
 import { NavigationContainer, useNavigation } from "@react-navigation/native"; 
 
 import { Navigation } from "../Navigation";

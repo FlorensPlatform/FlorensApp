@@ -15,7 +15,7 @@ const Necesidades = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/DocumentsNece`);
+      const response = await axios.get(`${BASE_URL}/NecesidadesLista`);
       setData(response.data);
     } catch (error) {
       console.error('Error al obtener datos de la API:', error);
@@ -27,11 +27,15 @@ const Necesidades = () => {
   const navigation = useNavigation();
  //<Text style={styles.title}>{item.nombre}</Text
   const renderItems = () => {
-    return data.map(item => (
-      <TouchableOpacity style={styles.item} key={item.id} onPress={() => navigation.navigate('DesNecesidades',{Document:item.nombre})}>
-        <Text style={styles.title}>{item.id}</Text>
-        <Image style={styles.Image} source={require('../../img/n1.png')}></Image>
-        <Text style={styles.title}>{item.id}</Text>
+    return Object.keys(data).map(item => (
+      <TouchableOpacity style={styles.item} key={item} onPress={() => navigation.navigate('DesNecesidades',{Document:data[item].Title, Id:data[item].Id})}>
+        
+        <Image style={styles.Image} source={require('../../img/n1.png')}>
+        </Image>
+        <Image style={styles.anotherImage} source={{ uri: data[item].Img }}>
+        </Image>
+        <Text style={styles.titleNumber}>{item}</Text>
+        <Text style={styles.title}>{data[item].Title}</Text>
       </TouchableOpacity>
     ));
   };
@@ -68,6 +72,19 @@ const styles = StyleSheet.create({
   Image: {
     width: 60,
     height: 60,
+    resizeMode: 'cover',
+    marginRight: 10,
+  },
+  anotherImage: {
+    width: 35, 
+    height: 35, 
+    resizeMode: 'cover',
+    position: 'absolute',
+    top: '50%',  
+    left: '50%', 
+    transform: [{ translateX: -16.5 }, { translateY: -30.5 }],
+    borderRadius: 10, 
+    
   },
   row: {
     flexDirection: 'row',
@@ -86,12 +103,18 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: '#003F72',
   },
+  titleNumber:{
+    fontSize: 10,
+    color:"#FFFFFF",
+    transform: [{ translateX: -2 }, { translateY: -18.5 }],
+  },
   textoBien: {
     color: '#003F72',
     fontSize: 15,
     textAlign: 'center',
     fontWeight: 'bold'
   },
+  
 });
 
 export default Necesidades;
