@@ -9,48 +9,50 @@ const Patrones = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
     
-    useEffect(() => {
-      fetchData();
-    }, []);
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/DocumentsPatro`);
-        setData(response.data);
-      } catch (error) {
-        console.error('Error al obtener datos de la API:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    const navigation = useNavigation();
-    const renderItems = () => {
-      return data.map(item => (
-        <TouchableOpacity style={styles.item} key={item.id} onPress={() => navigation.navigate('DesPatrones',{Document:item.nombre})}>
-          <Text style={styles.title}>{item.id}</Text>
-          <Image style={styles.Image} source={require('../../img/n1.png')}></Image>
-          <Text style={styles.title}>{item.id}</Text>
-        </TouchableOpacity>
-      ));
-    };
+  useEffect(() => {
+    fetchData();
+  }, []);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/PatronesLista`);
+      setData(response.data);
+    } catch (error) {
+      console.error('Error al obtener datos de la API:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const navigation = useNavigation();
+  const renderItems = () => {
+    return Object.keys(data).map(item => (
+      <TouchableOpacity style={styles.item} key={item.id} onPress={() => navigation.navigate('DesPatrones',{Document:data[item].Title, Id:data[item].Id})}>
+        <Image style={styles.Image} source={require('../../img/n1.png')}></Image>
+        <Image style={styles.anotherImage} source={{ uri: data[item].Img }}>
+        </Image>
+        <Text style={styles.titleNumber}>{item}</Text>
+        <Text style={styles.title}>{data[item].Title}</Text>
+      </TouchableOpacity>
+    ));
+  };
 
-  	return (
-        <SafeAreaView style={styles.container}>
-			<Spinner />
-            <Text style={styles.textoBien} >Patrones Funcionales de Marjory Gordon</Text>
-            <View style={styles.row}>
-                {renderItems().slice(0, 3)}
-            </View>
-            <View style={styles.row}>
-                {renderItems().slice(3, 6)}
-            </View>
-            <View style={styles.row}>
-                {renderItems().slice(6, 9)}
-            </View>
-            <View style={styles.row}>
-                {renderItems().slice(9, 11)}
-            </View>
-        </SafeAreaView>
-    );
+  return (
+      <SafeAreaView style={styles.container}>
+    <Spinner />
+          <Text style={styles.textoBien} >Patrones Funcionales de Marjory Gordon</Text>
+          <View style={styles.row}>
+              {renderItems().slice(0, 3)}
+          </View>
+          <View style={styles.row}>
+              {renderItems().slice(3, 6)}
+          </View>
+          <View style={styles.row}>
+              {renderItems().slice(6, 9)}
+          </View>
+          <View style={styles.row}>
+              {renderItems().slice(9, 11)}
+          </View>
+      </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -60,8 +62,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   Image:{
-      width: 60, 
-      height: 60,
+    width: 60, 
+    height: 60,
+    resizeMode: 'cover',
+    marginRight: 10,
+  },
+  anotherImage: {
+    width: 35, 
+    height: 35, 
+    resizeMode: 'cover',
+    position: 'absolute',
+    top: '50%',  
+    left: '50%', 
+    transform: [{ translateX: -16.5 }, { translateY: -30.5 }],
+    borderRadius: 10, 
+    
   },
   row: {
     flexDirection: 'row',
@@ -79,6 +94,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 10,
     color: '#003F72',
+  },
+  titleNumber:{
+    fontSize: 10,
+    color:"#FFFFFF",
+    transform: [{ translateX: -2 }, { translateY: -18.5 }],
   },
   textoBien: {
       color: '#003F72',

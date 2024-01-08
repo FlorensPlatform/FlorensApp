@@ -23,7 +23,7 @@ const Contenido = ({route}) => {
 			<View style={styles.Contenedor}>
 				<View style={styles.BotonesContenedor}>
 					<View>
-						<TouchableOpacity onPress={() => navigation.navigate('Necesidades')}
+						<TouchableOpacity onPress={() => navigation.navigate('Necesidades',{ screen: 'Necesidades' })}
 						style={styles.colorBtn}>
 							<Text style={styles.colorTxtBtn}>Necesidades Básicas</Text>
 						</TouchableOpacity>
@@ -36,7 +36,7 @@ const Contenido = ({route}) => {
 				</View>
 				<View style={styles.BotonesContenedor}>
 					<View>
-						<TouchableOpacity onPress={() => navigation.navigate('Patrones')}
+						<TouchableOpacity onPress={() => navigation.navigate('Patrones',{ screen: 'Patrones' })}
 						style={styles.colorBtn}>
 							<Text style={styles.colorTxtBtn}>Patrones Funcionales</Text>
 						</TouchableOpacity>
@@ -49,7 +49,7 @@ const Contenido = ({route}) => {
 				</View>
 				<View style={styles.BotonesContenedor}>
 					<View>
-						<TouchableOpacity onPress={() => navigation.navigate('Dominios')}
+						<TouchableOpacity onPress={() => navigation.navigate('Dominios',{ screen: 'Dominios' })}
 						style={styles.colorBtn}>
 							<Text style={styles.colorTxtBtn}>Dominios de NANDA</Text>
 						</TouchableOpacity>

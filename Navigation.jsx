@@ -36,9 +36,9 @@ const {isLoading, login, userInfo} = useContext(AuthContext);
         <Stack.Screen name="Registro" component={RegisScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Contenido" component={ContenidoScreen} options={{headerShown:false}}/>
 
-        <Stack.Screen name="Necesidades" component={TabNavigator} />
-        <Stack.Screen name="Patrones" component={TabNavigator} />
-        <Stack.Screen name="Dominios" component={TabNavigator} />
+        <Stack.Screen name="Necesidades" component={TabNavigator} initialParams={{ screen: "Necesidades" }}/>
+        <Stack.Screen name="Patrones" component={TabNavigator} initialParams={{ screen: "Patrones" }}/>
+        <Stack.Screen name="Dominios" component={TabNavigator} initialParams={{ screen: "Dominioss" }}/>
         
         <Stack.Screen name="DesNecesidades" component={DesNecesidadesScreen} />
         <Stack.Screen name="DesDominios" component={DesDominioScreen} />

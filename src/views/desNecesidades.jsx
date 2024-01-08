@@ -65,9 +65,11 @@ const DesNecesidades = ({route}) => {
 			<Text style={styles.textoBien} >Necesidades de Virginia Henderson</Text>
 			<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
 				<Image
-					source={require('../../img/Nanda.png')}
-					style={{ width: 60, height: 70 }}
+					source={require('../../img/Rectangulo.png')}
+					style={styles.Image}
 				/>
+				<Image style={styles.anotherImage} source={{ uri: data[0].Img }}>
+        		</Image>
 				<Text style={styles.colorTxtLogo}>{data[0]?.Título}</Text>
 			</View>
 			<Text style={styles.txtArea} >{data[0]?.Definición}</Text>
@@ -130,6 +132,23 @@ const styles = StyleSheet.create({
 	backgroundColor: "#FFFFFF",
 	alignItems: 'center',
 	justifyContent: 'center',
+  },
+  Image: {
+    width: 60,
+    height: 60,
+    resizeMode: 'cover',
+    marginRight: 10,
+  },
+  anotherImage: {
+    width: 35, 
+    height: 35, 
+    resizeMode: 'cover',
+    position: 'absolute',
+    top: '50%',  
+    left: '50%', 
+    transform: [{ translateX: -218.5 }, { translateY: -15.5 }],
+    borderRadius: 10, 
+    
   },
   txtArea: {
 	  color: '#003F72',
