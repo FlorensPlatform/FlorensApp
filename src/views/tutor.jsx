@@ -55,6 +55,7 @@ const ChatScreen = () => {
         messages={messages}
         onSend={(newMessages) => onSend(newMessages)}
         user={{ _id: 1 }}
+        placeholder="Ingresa una instrucción"
       />
     </View>
   );
