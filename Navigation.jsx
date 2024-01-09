@@ -13,6 +13,7 @@ import ContenidoScreen from "./src/views/contenido";
 import NecesidadesScreen from "./src/views/necesidades";
 import PatronesScreen from "./src/views/patrones";
 import DominiosScreen from "./src/views/dominios";
+import TutorScreen from "./src/views/tutor";
 import DesNecesidadesScreen from "./src/views/desNecesidades";
 import DesDominioScreen from "./src/views/desDominios";
 import DesPatronesScreen from "./src/views/desPatrones";
@@ -39,10 +40,11 @@ const {isLoading, login, userInfo} = useContext(AuthContext);
         <Stack.Screen name="Necesidades" component={TabNavigator} initialParams={{ screen: "Necesidades" }}/>
         <Stack.Screen name="Patrones" component={TabNavigator} initialParams={{ screen: "Patrones" }}/>
         <Stack.Screen name="Dominios" component={TabNavigator} initialParams={{ screen: "Dominioss" }}/>
+        <Stack.Screen name="Tutor" component={TabNavigator} initialParams={{ screen: "Tutor" }}/>
         
         <Stack.Screen name="DesNecesidades" component={DesNecesidadesScreen} />
         <Stack.Screen name="DesDominios" component={DesDominioScreen} />
-        <Stack.Screen name="DesPatrones" component={DesPatronesScreen} />
+        <Stack.Screen name="DesPatrones" component={DesPatronesScreen}/>
         
       </Stack.Navigator>
       
@@ -80,7 +82,7 @@ function TabNavigator() {
             style={{ width: 50, height: 50 }}
           />
         ),}}/>
-        <Tab.Screen name="Tutor" component={DominiosScreen} options={{headerShown:false, 
+        <Tab.Screen name="Tutor" component={TutorScreen} options={{headerShown:false, 
         tabBarIcon: ({ focused, color, size }) => (
           <Image
             source={focused ? require('./img/tutor_logo_1.png') : require('./img/tutor_logo.png')}

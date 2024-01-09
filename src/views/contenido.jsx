@@ -62,7 +62,7 @@ const Contenido = ({route}) => {
 				</View>
 				<View style={styles.BotonesContenedor}>
 					<View>
-						<TouchableOpacity
+						<TouchableOpacity onPress={() => navigation.navigate('Tutor',{ screen: 'Tutor' })}
 						style={styles.colorBtn}>
 							<Text style={styles.colorTxtBtn}>Tutor Automatizado</Text>
 						</TouchableOpacity>
