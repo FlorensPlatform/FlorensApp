@@ -68,7 +68,7 @@ const DesNecesidades = ({route}) => {
 					source={require('../../img/Rectangulo.png')}
 					style={styles.Image}
 				/>
-				<Image style={styles.anotherImage} source={{ uri: data[0].Img }}>
+				<Image style={styles.anotherImage} source={{ uri: data[0]?.Img }}>
         		</Image>
 				<Text style={styles.colorTxtLogo}>{data[0]?.Título}</Text>
 			</View>
