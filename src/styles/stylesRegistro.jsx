@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     IconText:{
-        flexDirection: 'row', alignItems: 'center',
+        flexDirection: 'row', textAlign: 'center',
     },
     TextoUsuario:{
         color: '#EAAB00',
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         textAlign: 'center',
         width: 200,
+        right:8,
     },
     errorText: {
         fontSize: 14,

@@ -2,7 +2,7 @@ import React from "react";
 import {View, Text, Picker, StyleSheet, TouchableOpacity, Dimensions, ScrollView} from 'react-native'
 
 
-const OPTIONS = ["Español","Ingles","Aleman","Ruso","Mandarin"];
+const OPTIONS = ["Español","Ingles"];
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
 const ModalPicker = (props) =>{
@@ -29,7 +29,7 @@ const ModalPicker = (props) =>{
             onPress={() => props.changeModalVisibility(false)}
             style = {styles.container}
         >
-            <View style = {[styles.modal, {width:WIDTH - 20, height:HEIGHT/2}]}>
+            <View style = {[styles.modal, {width:WIDTH - 150, height:HEIGHT/4.2, left: 65, top: 60,}]}>
                 <ScrollView>
                     {option}
                 </ScrollView>
@@ -41,31 +41,38 @@ const ModalPicker = (props) =>{
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
-        textAlign:'center',
-        justifyContent:'center'
+      flex: 1,
+      textAlign: 'center',
+      justifyContent: 'center'
     },
-    modal:{
-        backgroundColor: "#C2FBFC",
-        borderRadius:50,
-        margin: 10,
-        padding: 35,
-       
-        shadowColor: "#FFFFFF",
-        
-        shadowOpacity: 0.25,
-       
-        elevation: 5
+    modal: {
+      backgroundColor: "#003F72", // Fondo con un poco más de transparencia
+      borderRadius: 50,
+      margin: 10,
+      padding: 35,
+      elevation: 15,
+      borderColor: "#000",
+      shadowColor: "#FFFFFF", // Sombra alrededor del modal
+      shadowOpacity: 0.15, // Opacidad de la sombra
+      shadowRadius: 5,
     },
-    option:{
-        alignItems:"flex-start",
-
+    option: {
+      alignItems: "flex-start",
+      backgroundColor: "#EAAB00", // Fondo amarillo
+      borderWidth: 1, // Borde fino
+      borderColor: "#ccc", // Color del borde
+      marginBottom: 10, // Espacio entre opciones
+      height:50,
+      borderRadius: 10,
     },
-    text:{
-        margin:20,
-        fontSize: 20,
-        marginLeft: 50,
-        marginTop: 10,
+    text: {
+      margin: 5,
+      fontSize: 20,
+      marginLeft: 60,
+      marginTop: 10,
+      color: "#FFF",
+      fontWeight: 'bold',
     }
-})
+  });
+  
 export {ModalPicker}

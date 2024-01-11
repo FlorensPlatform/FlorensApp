@@ -29,7 +29,7 @@ const Registro = ({route}) => {
                     />
                 </View>
                 <Text style={styles.textoBien} >Crear Cuenta</Text>
-                <Text style={styles.TextoIngr} >Crear nueva cuenta</Text>
+                <Text style={styles.TextoIngr} >Por favor, llene todos los campos</Text>
                 <View style={styles.txtInput}>
                     <View style={styles.IconText}>
                         <Text style={styles.TextoUsuario} >Nombre</Text>
@@ -96,7 +96,7 @@ const Registro = ({route}) => {
                 </TouchableOpacity>
                 <Text> </Text>
                 <View style={styles.IconText}>
-                    <Text>Ya tienes cuenta,</Text>
+                    <Text style={{right:-70}}>Ya tienes cuenta,</Text>
                     <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                         <Text style={styles.colorTxtBtnRegistro}>Ingresa</Text>
                     </TouchableOpacity>

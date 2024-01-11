@@ -68,7 +68,7 @@ const DesPatrones = ({route}) => {
 	  	<View style={styles.containerDev}>
 			<ScrollView>
 				<Text style={styles.textoBien} >Patrones de Marjory Gordon</Text>
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+				<View style={{ flexDirection: 'row', justifyContent: 'center', padding: 5 }}>
 				<Image
 						source={require('../../img/Rectangulo.png')}
 						style={styles.Image}
@@ -87,7 +87,7 @@ const DesPatrones = ({route}) => {
 									mostrarInformacionValorar && (
 										transformarAfecciones(),
 										<>
-										<Text style={{ fontSize: 14, marginVertical: 10,color: '#003F72',fontWeight: 'bold',}}>{resultValorar}</Text>
+										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultValorar}</Text>
 										</>
 									)
 								}
@@ -101,7 +101,7 @@ const DesPatrones = ({route}) => {
 									mostrarInformacionPatron && (
 										transformarAfecciones(),
 										<>
-										<Text style={{ fontSize: 14, marginVertical: 10,color: '#003F72',fontWeight: 'bold',}}>{resultPatron}</Text>
+										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultPatron}</Text>
 										</>
 									)
 								}
@@ -115,7 +115,7 @@ const DesPatrones = ({route}) => {
 									mostrarInformacionResultados && (
 										transformarAfecciones(),
 										<>
-										<Text style={{ fontSize: 14, marginVertical: 10,color: '#003F72',fontWeight: 'bold',}}>{resultResultados}</Text>
+										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultResultados}</Text>
 										</>
 									)
 								}

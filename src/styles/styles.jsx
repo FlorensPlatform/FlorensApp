@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         textAlign: 'center',
         width: 150,
+        left: 20,
     },
     errorText: {
         fontSize: 14,
@@ -83,11 +84,13 @@ const styles = StyleSheet.create({
         marginLeft: 100,
         marginRight: 100,
         borderRadius: 10,
-        borderWidth:1
+        borderWidth:1,
+        justifyContent: 'center',
     },
     textItem:{
         fontSize:20,
-        color: '#003F72'
+        color: '#003F72',
+        textAlign: 'center'
     }, 
 });
 

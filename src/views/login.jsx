@@ -8,7 +8,7 @@ import styles from '../styles/styles';
 const Login = ({route}) => {
     const navigation = useNavigation();
     //const styles = style();
-    const [chooseData, setchoosedata] = useState("Idioma...");
+    const [chooseData, setchoosedata] = useState("Idioma");
     const [isModalVisible, setisModalVisible] = useState(false);
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
@@ -66,7 +66,7 @@ const Login = ({route}) => {
                 </TouchableOpacity>
                 <Text> </Text>
                 <View style={styles.IconText}>
-                    <Text>No tienes cuenta,</Text>
+                    <Text style={{right: -22,}}>No tienes cuenta,</Text>
                     <TouchableOpacity onPress={() => navigation.navigate('Registro')}>
                         <Text style={styles.colorTxtBtnRegistro}>Crea una cuenta nueva</Text>
                     </TouchableOpacity>
