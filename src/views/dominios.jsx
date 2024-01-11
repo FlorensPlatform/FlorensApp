@@ -1,43 +1,45 @@
-import react,  {useContext, useState} from "react";
+import react,  {useContext, useState, useEffect} from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, SafeAreaView } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-import { AuthContext } from "../../context/AuthContext";
+import { BASE_URL } from '../config';
 import Spinner from 'react-native-loading-spinner-overlay';
-import Icon from 'react-native-vector-icons/FontAwesome';
-const DATA = [
-    { id: '1', title: 'Salud', url:'../../img/n1.png'},
-    { id: '2', title: 'Nutrición',url:'../../img/n1.png' },
-    { id: '3', title: 'Eliminación',url:'../../img/n1.png' },
-    { id: '4', title: 'Reposo',url:'../../img/n1.png' },
-    { id: '5', title: 'Cognición',url:'../../img/n1.png' },
-    { id: '6', title: 'Autopercepcion' ,url:'../../img/n1.png'},
-    { id: '7', title: 'Relaciones',url:'../../img/n1.png' },
-    { id: '8', title: 'Sexualidad',url:'../../img/n1.png' },
-    { id: '9', title: 'Tolerancia',url:'../../img/n1.png' },
-    { id: '10', title: 'Vitalidad',url:'../../img/n1.png' },
-    { id: '11', title: 'Seguridad',url:'../../img/n1.png' },
-	{ id: '12', title: 'Confort',url:'../../img/n1.png' },
-	{ id: '13', title: 'Desarrollo',url:'../../img/n1.png' }
-    // Agrega más elementos según sea necesario
-  ];
-  const Item = ({ key, title, navigation }) => (
-    <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('DesDominios')}>
-        <Text style={styles.title}>{key}</Text>
-        <Image style={styles.Image}
-				source={require('../../img/n1.png')}></Image>
-      <Text style={styles.title}>{title}</Text>
-    </TouchableOpacity>
-  );
+import axios from 'axios';
+import styles from "../styles/stylesDominios";
 const Dominios = ({router}) => {
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const navigation = useNavigation();
+
+    useEffect(() => {
+      fetchData();
+    }, []);
+  
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/DominiosLista`);
+        setData(response.data);
+      } catch (error) {
+        console.error('Error al obtener datos de la API:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
     const renderItems = () => {
-        return DATA.map(item => (
-          <Item key={item.id} title={item.title} navigation={navigation} />
-        ));
-      };
+      return Object.keys(data).map(item => (
+        <TouchableOpacity style={styles.item} key={item} onPress={() => navigation.navigate('DesDominios',{Document:data[item].Title, Id:data[item].Id})}>
+          
+          <Image style={styles.Image} source={require('../../img/n1.png')}>
+          </Image>
+          <Image style={styles.anotherImage} source={{ uri: data[item].Img }}>
+          </Image>
+          <Text style={styles.titleNumber}>{item}</Text>
+          <Text style={styles.title}>{data[item].Title}</Text>
+        </TouchableOpacity>
+      ));
+    };
   	return (
-        <SafeAreaView style={styles.container}>
-			<Spinner />
+      <SafeAreaView style={styles.container}>
+			<Spinner visible={isLoading}/>
             <Text style={styles.textoBien} >Dominios de NANDA</Text>
             <View style={styles.row}>
                 {renderItems().slice(0, 3)}
@@ -51,46 +53,11 @@ const Dominios = ({router}) => {
             <View style={styles.row}>
                 {renderItems().slice(9, 12)}
             </View>
-			<View style={styles.row}>
+			      <View style={styles.row}>
                 {renderItems().slice(12, 15)}
             </View>
-        </SafeAreaView>
+      </SafeAreaView>
     );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: '#FFFFFF',
-  },
-  Image:{
-      width: 60, 
-      height: 60,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 16,
-  },
-  item: {
-    backgroundColor: '#FFFFFFB3',
-    padding: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '30%',
-    borderColor: '#003F72',
-  },
-  title: {
-    fontSize: 10,
-    color: '#003F72',
-  },
-  textoBien: {
-      color: '#003F72',
-      fontSize: 15,
-      textAlign: 'center',
-      fontWeight: 'bold'
-  },
-});
 
 export default Dominios;

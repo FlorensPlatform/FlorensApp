@@ -45,7 +45,7 @@ export const AuthProvider = ({children}) => {
     const register = (nombre, pais, ciudad, email, universidad, password) =>{
         setIsLoading(true);
         axios.post(`${BASE_URL}/Registro`,{
-            nombre, pais, ciudad, email, universidad, password
+            nombre, pais, ciudad, email, universidad, password, rol:"usuario"
         }).then(res => {
             let userInfo = res.data;
             setUserInfo(userInfo);

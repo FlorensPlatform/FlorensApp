@@ -39,7 +39,7 @@ const {isLoading, login, userInfo} = useContext(AuthContext);
 
         <Stack.Screen name="Necesidades" component={TabNavigator} initialParams={{ screen: "Necesidades" }}/>
         <Stack.Screen name="Patrones" component={TabNavigator} initialParams={{ screen: "Patrones" }}/>
-        <Stack.Screen name="Dominios" component={TabNavigator} initialParams={{ screen: "Dominioss" }}/>
+        <Stack.Screen name="Dominios" component={TabNavigator} initialParams={{ screen: "Dominios" }}/>
         <Stack.Screen name="Tutor" component={TabNavigator} initialParams={{ screen: "Tutor" }}/>
         
         <Stack.Screen name="DesNecesidades" component={DesNecesidadesScreen} />
@@ -96,7 +96,7 @@ const CustomHeader = () => {
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       <Image
-        source={require('./img/UTPL.png')}
+        source={require('./img/UTPL1.png')}
         style={{ width: 80, height: 30, marginRight: 20 }}
       />
       <Text style={{ fontSize: 20, fontWeight: 'bold',color:"#FFFFFF", paddingLeft:10 }}>Florens</Text>
