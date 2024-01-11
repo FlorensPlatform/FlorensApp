@@ -16,7 +16,7 @@ const ChatScreen = () => {
       // Ejemplo de mensaje del bot
       {
         _id: 1,
-        text: 'Hola, ¿cómo puedo ayudarte?',
+        text: 'Hola soy Lucia, ¿en que puedo ayudarte?',
         createdAt: new Date(),
         user: {
           _id: 2,
