@@ -40,7 +40,6 @@ const Dominios = ({router}) => {
   	return (
       <SafeAreaView style={styles.container}>
 			<Spinner visible={isLoading}/>
-            <Text style={styles.textoBien} >Dominios de NANDA</Text>
             <View style={styles.row}>
                 {renderItems().slice(0, 3)}
             </View>

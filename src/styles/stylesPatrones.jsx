@@ -11,21 +11,24 @@ const styles = StyleSheet.create({
         height: 60,
         resizeMode: 'cover',
         marginRight: 10,
+        padding:43,
     },
     anotherImage: {
-        width: 35, 
-        height: 35, 
+        width: 40, 
+        height: 40, 
         resizeMode: 'cover',
         position: 'absolute',
-        top: '50%',  
-        left: '50%', 
+        top: '40%',  
+        left: '47%', 
         transform: [{ translateX: -16.5 }, { translateY: -30.5 }],
         borderRadius: 10, 
     },
     row: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 16,
+        marginBottom: -5,
+        justifyContent: 'left',
+        left: 5,
+        top: -15,
     },
     item: {
         backgroundColor: '#FFFFFFB3',
@@ -34,23 +37,29 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '30%',
         borderColor: '#003F72',
+        margin:5,
+        
     },
     title: {
-        fontSize: 10,
+        fontSize: 15,
         color: '#003F72',
+        fontWeight: 'bold',
+        top: -10,
     },
     titleNumber:{
-        fontSize: 10,
+        fontSize: 13,
         color:"#FFFFFF",
-        transform: [{ translateX: -2 }, { translateY: -18.5 }],
+        transform: [{ translateX: -2 }, { translateY: -22.5 }],
+        fontWeight: 'bold',
     },
     textoBien: {
         color: '#003F72',
-        fontSize: 15,
+        fontSize: 19,
         textAlign: 'center',
         fontWeight: 'bold',
         padding:10
     },
+    
     //estilos descripcion de patrones
     Contenedor:{
 		marginRight:100,
@@ -63,29 +72,31 @@ const styles = StyleSheet.create({
 		flex:1
 	},
     anotherImageDev: {
-        width: 35, 
-        height: 35, 
+        width: 50, 
+        height: 50, 
         resizeMode: 'cover',
         position: 'absolute',
-        top: '50%',  
-        left: '50%', 
-        transform: [{ translateX: -218.5 }, { translateY: -15.5 }],
+        top: '40%',  
+        left: '48%', 
+        transform: [{ translateX: -60.5 }, { translateY: -15.5 }],
         borderRadius: 10, 
+
     },
     txtArea: {
         color: '#003F72',
-        fontSize: 13,
-        textAlign: 'left',
+        fontSize: 18,
+        textAlign: 'justify',
         fontWeight: 'bold',
         marginLeft: 15,
         marginRight:10
     },
     colorTxtBtn: {
         color: '#003F72',
-        fontSize: 14,
+        fontSize: 20,
         textAlign: 'center',
-        width: 150,
+        width: 200,
         fontWeight: 'bold',
+        textAlign: 'left',
     },
     colorBtn: {
         marginTop: 40,
@@ -99,11 +110,10 @@ const styles = StyleSheet.create({
     },
     colorTxtLogo: {
         color: '#003F72',
-        fontSize: 15,
-        textAlign: 'center',
+        fontSize: 20,
         fontWeight: 'bold',
         marginTop:20,
-        marginLeft: 40
+        left: 20,
     },
 });
 

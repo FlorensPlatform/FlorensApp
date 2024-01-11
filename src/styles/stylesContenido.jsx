@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     VistaImagenText:{
         flexDirection: 'row', 
         justifyContent: 'space-between', 
-        padding: 5
+        padding: 10
     },
 	BotonesContenedor:{
 		flexDirection: 'row', justifyContent: 'space-between', padding: 15
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	  },
 	  Image:{
-		width: 120, height: 50, 
+		width: 180, height: 70, 
 		justifyContent: 'right',
 		resizeMode: 'contain',
 		right: 100,
@@ -54,10 +54,12 @@ const styles = StyleSheet.create({
       },
 	colorTxtLogo: {
         color: '#003F72',
-        fontSize: 25,
+        fontSize: 30,
         textAlign: 'center',
         fontWeight: 'bold',
-		marginTop:15
+		marginTop:105,
+		padding: -5,
+		marginLeft: -250,
       },
 
 });

@@ -10,12 +10,15 @@ const Contenido = ({route}) => {
   	return (
 		<View style={styles.container}>
 			<Spinner />
-			<Image style={styles.Image}
-				source={require('../../img/UTPL.png')}></Image>
+			
 			<View style={styles.VistaImagenText}>
+			<Image style={styles.Image}
+				source={require('../../img/UTPL.png')}
+				
+				></Image>
 				<Image
 					source={require('../../img/logo.png')}
-					style={{ width: 60, height: 70 }}
+					style={{ width: 60, height: 70, top: 20, left:-30, }}
 				/>
 				<Text style={styles.colorTxtLogo}>Bienvenido a {"\n"} Florens</Text>
 			</View>
@@ -31,7 +34,7 @@ const Contenido = ({route}) => {
 					</View>
 					<Image
 						source={require('../../img/Henderson.png')}
-						style={{ width: 65, height: 60 }}
+						style={{ width: 65, height: 60,left: 30 }}
 					/>
 				</View>
 				<View style={styles.BotonesContenedor}>
@@ -44,7 +47,7 @@ const Contenido = ({route}) => {
 					</View>
 					<Image
 						source={require('../../img/Gordon.png')}
-						style={{ width: 50, height: 60 }}
+						style={{ width: 50, height: 60,left: 20, top:15 }}
 					/>
 				</View>
 				<View style={styles.BotonesContenedor}>
@@ -57,7 +60,7 @@ const Contenido = ({route}) => {
 					</View>
 					<Image
 						source={require('../../img/Nanda.png')}
-						style={{ width: 50, height: 60 }}
+						style={{ width: 50, height: 60, left: 20, top: 20 }}
 					/>
 				</View>
 				<View style={styles.BotonesContenedor}>
@@ -70,7 +73,7 @@ const Contenido = ({route}) => {
 					</View>
 					<Image
 						source={require('../../img/tutor.png')}
-						style={{ width: 40, height: 60}}
+						style={{ width: 40, height: 60, left: 12, top: 20}}
 					/>
 				</View>
 			</View>

@@ -39,7 +39,6 @@ const Patrones = () => {
   return (
       <SafeAreaView style={styles.container}>
     <Spinner />
-          <Text style={styles.textoBien} >Patrones Funcionales de Marjory Gordon</Text>
           <View style={styles.row}>
               {renderItems().slice(0, 3)}
           </View>

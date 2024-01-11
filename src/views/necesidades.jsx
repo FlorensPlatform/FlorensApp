@@ -44,7 +44,6 @@ const Necesidades = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Spinner visible={isLoading} />
-      <Text style={styles.textoBien} >Necesidades de Virginia Henderson</Text>
         <View style={styles.row}>
           {renderItems().slice(0, 3)}
         </View>

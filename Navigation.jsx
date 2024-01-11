@@ -97,13 +97,16 @@ const CustomHeader = () => {
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       <Image
         source={require('./img/UTPL1.png')}
-        style={{ width: 80, height: 30, marginRight: 20 }}
+        style={{ width: 90, height: 40, marginRight: 45 }}
       />
-      <Text style={{ fontSize: 20, fontWeight: 'bold',color:"#FFFFFF", paddingLeft:10 }}>Florens</Text>
-
-      <TouchableOpacity style={{  paddingLeft:50}}>
-          <Text style={{ fontSize: 15, fontWeight: 'bold',color:"#EAAB00" }}>Salir</Text>
-      </TouchableOpacity>
+      <Image
+        source={require('./img/florens.png')}
+        style={{ width: 40, height: 40, marginRight: 55 }}
+      />
+       <Image
+        source={require('./img/out.png')}
+        style={{ width: 35, height: 35, marginRight: 15 }}
+      />
     </View>
   );
 };

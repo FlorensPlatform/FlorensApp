@@ -64,12 +64,12 @@ const DesNecesidades = ({route}) => {
 		<View style={styles.containerDev}>
 			<ScrollView>
 				<Text style={styles.textoBien} >Necesidades de Virginia Henderson</Text>
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+				<View style={{ flexDirection: 'row', justifyContent: 'center', padding: 5 }}>
 					<Image
 						source={require('../../img/Rectangulo.png')}
 						style={styles.Image}
 					/>
-					<Image style={styles.anotherImageDes} source={{ uri: data[0]?.Img }}>
+					<Image style={styles.anotherImageDev} source={{ uri: data[0]?.Img }}>
 					</Image>
 					<Text style={styles.colorTxtLogo}>{data[0]?.Título}</Text>
 				</View>
@@ -82,7 +82,7 @@ const DesNecesidades = ({route}) => {
 								{
 									mostrarInformacion && (
 										<>
-										<Text style={{ fontSize: 14, marginVertical: 10,color: '#003F72',fontWeight: 'bold',}}>{data[0]?.Objetivo}</Text>
+										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{data[0]?.Objetivo}</Text>
 										</>
 									)
 								}
@@ -90,13 +90,13 @@ const DesNecesidades = ({route}) => {
 						</TouchableOpacity>
 					<TouchableOpacity
 						style={styles.colorBtn} onPress={mostrarOcultarAfecciones}>
-							<Text style={styles.colorTxtBtn}>Aspectos a Valora</Text>
+							<Text style={styles.colorTxtBtn}>Afecciones Derivadas</Text>
 							<View>
 								{
 									mostrarInformacionAfecciones && (
 										transformarAfecciones(),
 										<>
-										<Text style={{ fontSize: 14, marginVertical: 10,color: '#003F72',fontWeight: 'bold',}}>{resultAfecciones}</Text>
+										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultAfecciones}</Text>
 										</>
 									)
 								}
@@ -110,7 +110,7 @@ const DesNecesidades = ({route}) => {
 									mostrarInformacionCuidados && (
 										transformarAfecciones(),
 										<>
-										<Text style={{ fontSize: 14, marginVertical: 10,color: '#003F72',fontWeight: 'bold',}}>{resultadosCuidados}</Text>
+										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultadosCuidados}</Text>
 										</>
 									)
 								}
