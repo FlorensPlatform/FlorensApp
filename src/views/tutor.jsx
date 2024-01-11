@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, View } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { Alert, View, ImageBackground, Image } from 'react-native';
+import { GiftedChat, Send } from 'react-native-gifted-chat';
 import axios from 'axios';
 import { BASE_URL } from '../config';
 
@@ -64,16 +64,29 @@ const ChatScreen = () => {
       throw error;
     }
   };
-
+  const renderSend = (props)=>{
+    return (
+      <Send {... props}>
+        <View>
+          <Image source={require('../../img/enviar.png')} style={{width: 30, height: 30, marginBottom: 7, marginRight: 8}}>
+          </Image>
+        </View>
+      </Send>
+    )
+  }
   return (
-    <View style={{ flex: 1 }}>
-      <GiftedChat
-        messages={messages}
-        onSend={(newMessages) => onSend(newMessages)}
-        user={{ _id: 1 }}
-        placeholder="Ingresa una instrucción"
-      />
+    <ImageBackground source={require('../../img/fondo.jpg')} 
+      style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: 'transparent'}}>
+        <GiftedChat
+          messages={messages}
+          onSend={(newMessages) => onSend(newMessages)}
+          user={{ _id: 1 }}
+          placeholder="Ingresa una instrucción"
+          renderSend={renderSend}
+        />
     </View>
+    </ImageBackground>
   );
 };
 
