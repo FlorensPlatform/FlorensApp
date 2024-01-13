@@ -11,8 +11,9 @@ const DesDominios = () => {
 		checkUserAuthentication();
 		const intervalId = setInterval(() => {
 			checkUserAuthentication();
-		  }, 2000); 
+		  }, 2000);
 		fetchData();
+		return () => clearInterval(intervalId);
 	}, []);
 	return (
 	  <View style={styles.container}>

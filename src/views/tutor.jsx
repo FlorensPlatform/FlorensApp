@@ -13,6 +13,7 @@ const ChatScreen = () => {
       checkUserAuthentication();
     }, 2000); 
     loadInitialMessages();
+    return () => clearInterval(intervalId);
   }, []);
 
   const loadInitialMessages = () => {

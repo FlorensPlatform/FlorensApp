@@ -24,6 +24,7 @@ const DesPatrones = ({route}) => {
 			checkUserAuthentication();
 		}, 2000); 
 		fetchData();
+		return () => clearInterval(intervalId);
 	}, []);
 	
 	  const fetchData = async () => {
