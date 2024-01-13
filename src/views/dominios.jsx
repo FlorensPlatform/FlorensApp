@@ -5,12 +5,18 @@ import { BASE_URL } from '../config';
 import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 import styles from "../styles/stylesDominios";
+import { AuthContext } from "../../context/AuthContext";
 const Dominios = ({router}) => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const navigation = useNavigation();
-
+    const {checkUserAuthentication} = useContext(AuthContext);
     useEffect(() => {
+      checkUserAuthentication();
+      checkUserAuthentication();
+		  const intervalId = setInterval(() => {
+			checkUserAuthentication();
+		  }, 2000); 
       fetchData();
     }, []);
   

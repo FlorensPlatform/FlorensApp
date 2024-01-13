@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Alert, View, ImageBackground, Image } from 'react-native';
 import { GiftedChat, Send } from 'react-native-gifted-chat';
 import axios from 'axios';
 import { BASE_URL } from '../config';
-
+import { AuthContext } from "../../context/AuthContext";
 const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
-
+  const {checkUserAuthentication} = useContext(AuthContext);
   useEffect(() => {
+    checkUserAuthentication();
+    const intervalId = setInterval(() => {
+      checkUserAuthentication();
+    }, 2000); 
     loadInitialMessages();
   }, []);
 

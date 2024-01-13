@@ -1,4 +1,4 @@
-import react,  {useContext, useState} from "react";
+import react,  {useContext, useState,useEffect} from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Modal } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../../context/AuthContext";
@@ -12,8 +12,10 @@ const Login = ({route}) => {
     const [isModalVisible, setisModalVisible] = useState(false);
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
-    const {isLoading, login} = useContext(AuthContext);
-
+    const {isLoading, login,checkUserAuthentication} = useContext(AuthContext);
+    useEffect(() => {
+		checkUserAuthentication();
+	}, []);
     const changeModalVisibility = (bool) =>{
         setisModalVisible(bool)
     }

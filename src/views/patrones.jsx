@@ -5,12 +5,17 @@ import { BASE_URL } from '../config';
 import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 import styles from "../styles/stylesPatrones";
-
+import { AuthContext } from "../../context/AuthContext";
 const Patrones = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-    
+  const {checkUserAuthentication} = useContext(AuthContext);
   useEffect(() => {
+    checkUserAuthentication();
+    checkUserAuthentication();
+		const intervalId = setInterval(() => {
+			checkUserAuthentication();
+		}, 2000); 
     fetchData();
   }, []);
   const fetchData = async () => {

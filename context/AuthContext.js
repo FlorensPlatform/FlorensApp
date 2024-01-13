@@ -49,7 +49,7 @@ export const AuthProvider = ({children}) => {
         }).then(res => {
             let userInfo = res.data;
             setUserInfo(userInfo);
-            const usuario = AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+            const usuario = AsyncStorage.setItem('userData', JSON.stringify(userInfo));
             setIsLoading(false);
             if (usuario!=null){
                 console.log("mi usuario", usuario);
@@ -63,19 +63,21 @@ export const AuthProvider = ({children}) => {
     };
 
     // Login
-    const login = (email, password) =>{
+    const login = async (email, password) =>{
         setIsLoading(true);
         axios.post(`${BASE_URL}/verificar_usuario`,{
             email,
             password
         }).then(res => {
+            
             let userInfo = res.data;
             console.log(userInfo.status);
             setUserInfo(userInfo);
-            const token = AsyncStorage.setItem('userInfo', JSON.stringify(userInfo))
+            const token = AsyncStorage.setItem('userData', JSON.stringify(userInfo))
             if (userInfo.status){
                 console.log("mi token", token);
                 //navigation.navigate('Cuenta creada');Cuenta creada
+                
                 RootNavigation.navigate('Contenido');
             }
             setIsLoading(false);
@@ -87,8 +89,32 @@ export const AuthProvider = ({children}) => {
             setIsLoading(false);
         });
     }
+    const checkUserAuthentication = async () =>{
+        try {
+            const userData = await AsyncStorage.getItem('userData');
+            if (userData) {
+                //console.log('Usuario autenticado');
+            } else {
+                RootNavigation.navigate('Login');
+                //console.log('Usuario no autenticado');
+            }
+        } catch (error) {
+            console.error('Error al verificar la autenticación:', error);
+        }
+        
+    }
 
 
+    //Cerrar sesion
+    const closeSession = async () =>{
+        try {
+            await AsyncStorage.removeItem('userData');
+            //RootNavigation.navigate('Login');
+            console.log('Cierre de sesión exitoso');
+          } catch (error) {
+            console.error('Error al cerrar sesión:', error);
+          }
+    }
     //
     return(
         <AuthContext.Provider 
@@ -96,7 +122,9 @@ export const AuthProvider = ({children}) => {
                 isLoading,
                 userInfo,
                 login,
-                register
+                register,
+                closeSession,
+                checkUserAuthentication
             }}>
             {children}
         </AuthContext.Provider>

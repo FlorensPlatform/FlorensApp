@@ -5,7 +5,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 import { BASE_URL } from '../config';
 import styles from "../styles/stylesPatrones";
-
+import { AuthContext } from "../../context/AuthContext";
 const DesPatrones = ({route}) => {
 	const [data, setData] = useState([]);
 	const navigation = useNavigation();
@@ -17,9 +17,14 @@ const DesPatrones = ({route}) => {
 	const [resultValorar, setResultValorar] = useState("");
 	const [resultResultados, setResultResultados] = useState("");
 	const [resultPatron, setResultPatron] = useState("");
+	const {checkUserAuthentication} = useContext(AuthContext);
 	useEffect(() => {
+		checkUserAuthentication();
+		const intervalId = setInterval(() => {
+			checkUserAuthentication();
+		}, 2000); 
 		fetchData();
-	  }, []);
+	}, []);
 	
 	  const fetchData = async () => {
 		try {
@@ -54,7 +59,7 @@ const DesPatrones = ({route}) => {
 	};
 	const mostrarOcultarPatrones = () => {
 		let resultValorar = "";
-		Object.entries(data[0]?.["Alteraciones del Patrón"]).forEach(([afeccion, descripcion]) => {
+		Object.entries(data[0]?.["Alteraciones del Patron"]).forEach(([afeccion, descripcion]) => {
             resultValorar = resultValorar+`${afeccion}: ${descripcion}`+"\n";
           });
 		setResultPatron(resultValorar);
@@ -75,9 +80,9 @@ const DesPatrones = ({route}) => {
 					/>
 					<Image style={styles.anotherImageDev} source={{ uri: data[0]?.Img }}>
 					</Image>
-					<Text style={styles.colorTxtLogo}>{data[0]?.Título}</Text>
+					<Text style={styles.colorTxtLogo}>{data[0]?.Titulo}</Text>
 				</View>
-				<Text style={styles.txtArea} >{data[0]?.Definición}</Text>
+				<Text style={styles.txtArea} >{data[0]?.Definicion}</Text>
 				<View style={styles.Contenedor}>
 					<TouchableOpacity
 						style={styles.colorBtn} onPress={mostrarOcultarValorar}>

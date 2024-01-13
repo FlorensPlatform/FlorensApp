@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { BASE_URL } from '../config';
 import Spinner from 'react-native-loading-spinner-overlay';
 import styles from "../styles/stylesNecesidades"
-
+import { AuthContext } from "../../context/AuthContext";
 const DesNecesidades = ({route}) => {
 	const [data, setData] = useState([]);
 	const navigation = useNavigation();
@@ -16,9 +16,14 @@ const DesNecesidades = ({route}) => {
 	const [mostrarInformacionCuidados, setMostrarInformacionCuidados] = useState(false);
 	const [resultAfecciones, setResultAfecciones] = useState("");
 	const [resultadosCuidados, setResultCuidados] = useState("");
+	const {checkUserAuthentication} = useContext(AuthContext);
 	useEffect(() => {
+		checkUserAuthentication();
+		const intervalId = setInterval(() => {
+			checkUserAuthentication();
+		}, 2000); 
 		fetchData();
-	  }, []);
+	}, []);
 	
 	  const fetchData = async () => {
 		try {

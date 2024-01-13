@@ -20,7 +20,7 @@ import DesPatronesScreen from "./src/views/desPatrones";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Navigation = () => {
-const {isLoading, login, userInfo} = useContext(AuthContext);
+const {isLoading, closeSession} = useContext(AuthContext);
 
   return (
     <NavigationContainer ref={navigationRef}>      
@@ -93,6 +93,7 @@ function TabNavigator() {
   );
 }
 const CustomHeader = () => {
+  const { closeSession } = useContext(AuthContext);
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       <Image
@@ -103,10 +104,12 @@ const CustomHeader = () => {
         source={require('./img/florens.png')}
         style={{ width: 40, height: 40, marginRight: 55 }}
       />
-       <Image
-        source={require('./img/out.png')}
-        style={{ width: 35, height: 35, marginRight: 15 }}
-      />
+      <TouchableOpacity onPress={closeSession}>
+        <Image
+          source={require('./img/out.png')}
+          style={{ width: 35, height: 35, marginRight: 15 }}
+        />
+      </TouchableOpacity>
     </View>
   );
 };

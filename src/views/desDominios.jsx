@@ -1,10 +1,19 @@
+import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import Spinner from 'react-native-loading-spinner-overlay';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { AuthContext } from "../../context/AuthContext";
 
 const DesDominios = () => {
 	const navigation = useNavigation();
+	const {checkUserAuthentication} = useContext(AuthContext);
+	useEffect(() => {
+		checkUserAuthentication();
+		const intervalId = setInterval(() => {
+			checkUserAuthentication();
+		  }, 2000); 
+		fetchData();
+	}, []);
 	return (
 	  <View style={styles.container}>
 		  <Spinner />
