@@ -46,7 +46,7 @@ const DesNecesidades = ({route}) => {
 	  };
 	  const mostrarOcultarAfecciones = () => {
 		let resultAfecciones = "";
-		Object.entries(data[0]?.["Afecciones Derivadas"]).forEach(([afeccion, descripcion]) => {
+		Object.entries(data[0]?.Afecciones).forEach(([afeccion, descripcion]) => {
             console.log(`${afeccion}: ${descripcion}`);
             resultAfecciones = resultAfecciones+`${afeccion}: ${descripcion}`+"\n";
           });
@@ -55,7 +55,7 @@ const DesNecesidades = ({route}) => {
 	  };
 	  const mostrarOcultarCuidados = () => {
 		resultrCuidados = "";
-        Object.entries(data[0]?.["Cuidados por Aplicar"]).forEach(([afeccion, descripcion]) => {
+        Object.entries(data[0]?.Cuidados).forEach(([afeccion, descripcion]) => {
             console.log(`${afeccion}: ${descripcion}`);
             resultrCuidados = resultrCuidados+`${afeccion}: ${descripcion}`+"\n";
           });
@@ -77,9 +77,9 @@ const DesNecesidades = ({route}) => {
 					/>
 					<Image style={styles.anotherImageDev} source={{ uri: data[0]?.Img }}>
 					</Image>
-					<Text style={styles.colorTxtLogo}>{data[0]?.Título}</Text>
+					<Text style={styles.colorTxtLogo}>{data[0]?.Titulo}</Text>
 				</View>
-				<Text style={styles.txtArea} >{data[0]?.Definición}</Text>
+				<Text style={styles.txtArea} >{data[0]?.Definicion}</Text>
 				<View style={styles.Contenedor}>
 					<TouchableOpacity
 						style={styles.colorBtn} onPress={mostrarOcultarInformacion}>

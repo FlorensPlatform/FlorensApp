@@ -1,5 +1,5 @@
 import react,  {useContext, useState, useEffect} from "react";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { BASE_URL } from '../config';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -46,8 +46,8 @@ const Dominios = ({router}) => {
     };
   	return (
       <SafeAreaView style={styles.container}>
-			<Spinner visible={isLoading}/>
-            <View style={styles.row}>
+        <ScrollView>
+          <View style={styles.row}>
                 {renderItems().slice(0, 3)}
             </View>
             <View style={styles.row}>
@@ -62,6 +62,7 @@ const Dominios = ({router}) => {
 			      <View style={styles.row}>
                 {renderItems().slice(12, 15)}
             </View>
+        </ScrollView>  
       </SafeAreaView>
     );
 };

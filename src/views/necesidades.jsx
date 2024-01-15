@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { BASE_URL } from '../config';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -49,7 +49,7 @@ const Necesidades = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Spinner visible={isLoading} />
+      <ScrollView>
         <View style={styles.row}>
           {renderItems().slice(0, 3)}
         </View>
@@ -65,6 +65,7 @@ const Necesidades = () => {
         <View style={styles.row}>
           {renderItems().slice(12, 14)}
         </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

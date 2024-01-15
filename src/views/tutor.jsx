@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Alert, View, ImageBackground, Image } from 'react-native';
 import { GiftedChat, Send } from 'react-native-gifted-chat';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { BASE_URL } from '../config';
 import { AuthContext } from "../../context/AuthContext";
+
 const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
+  const [Data, setData] = useState("");
   const {checkUserAuthentication} = useContext(AuthContext);
   useEffect(() => {
     checkUserAuthentication();
@@ -16,20 +19,34 @@ const ChatScreen = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const loadInitialMessages = () => {
-    setMessages([
-      // Ejemplo de mensaje del bot
-      {
-        _id: 1,
-        text: 'Hola soy Lucia, ¿en que puedo ayudarte?',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'Asistente',
-          avatar: 'https://lh3.googleusercontent.com/ogw/ANLem4anf8RVn1mOTxOoo3fB8lyB2aU2vVSUV2tpBWRZNDg=s32-c-mo',
-        },
-      },
-    ]);
+  const loadInitialMessages = async () => {
+    const storedMessages = await AsyncStorage.getItem('userData');
+    setData(storedMessages.usuario);
+    try {
+      const storedMessages = await AsyncStorage.getItem('chat_history'+Data);
+
+      if (storedMessages) {
+        // Si hay mensajes almacenados
+        setMessages(JSON.parse(storedMessages));
+        console.log(JSON.parse(storedMessages));
+      } else {
+        // Si no hay mensajes almacenados
+        setMessages([
+          {
+            _id: 1,
+            text: 'Hola soy Lucia, ¿en qué puedo ayudarte?',
+            createdAt: new Date(),
+            user: {
+              _id: 2,
+              name: 'Asistente',
+              avatar: 'https://lh3.googleusercontent.com/ogw/ANLem4anf8RVn1mOTxOoo3fB8lyB2aU2vVSUV2tpBWRZNDg=s32-c-mo',
+            },
+          },
+        ]);
+      }
+    } catch (error) {
+      console.error('Error al cargar mensajes iniciales:', error);
+    }
   };
 
   const onSend = async (newMessages = []) => {
@@ -50,7 +67,7 @@ const ChatScreen = () => {
 
     // Actualizar el estado de los mensajes
     setMessages((prevMessages) => GiftedChat.append(prevMessages,[botMessage,userMessage]));
-    
+    saveMessagesToStorage();
   };
 
   const sendUserMessage = async (text) => {
@@ -69,6 +86,15 @@ const ChatScreen = () => {
       throw error;
     }
   };
+  const saveMessagesToStorage = async () => {
+    try {
+      // Guarda los mensajes en AsyncStorage como una cadena JSON
+      await AsyncStorage.setItem('chat_history'+Data, JSON.stringify(messages));
+    } catch (error) {
+      console.error('Error al guardar mensajes en AsyncStorage:', error);
+    }
+  };
+
   const renderSend = (props)=>{
     return (
       <Send {... props}>
