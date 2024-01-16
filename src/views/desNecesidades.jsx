@@ -8,14 +8,17 @@ import styles from "../styles/stylesNecesidades"
 import { AuthContext } from "../../context/AuthContext";
 const DesNecesidades = ({route}) => {
 	const [data, setData] = useState([]);
+	const [datosBibliografia, setDatosBibliografia] = useState([]);
 	const navigation = useNavigation();
 	const {Document} = route.params;
 	const {Id} = route.params;
 	const [mostrarInformacion, setMostrarInformacion] = useState(false);
 	const [mostrarInformacionAfecciones, setMostrarInformacionAfecciones] = useState(false);
 	const [mostrarInformacionCuidados, setMostrarInformacionCuidados] = useState(false);
+	const [mostrarInformacionBiblio, setMostrarInformacionBiblio] = useState(false);
 	const [resultAfecciones, setResultAfecciones] = useState("");
 	const [resultadosCuidados, setResultCuidados] = useState("");
+	const [resultadosBiblio, setResultBiblio] = useState("");
 	const {checkUserAuthentication} = useContext(AuthContext);
 	useEffect(() => {
 		checkUserAuthentication();
@@ -23,6 +26,7 @@ const DesNecesidades = ({route}) => {
 			checkUserAuthentication();
 		}, 2000); 
 		fetchData();
+		ObtenerBibliografia();
 		return () => clearInterval(intervalId);
 	}, []);
 	
@@ -37,10 +41,18 @@ const DesNecesidades = ({route}) => {
 		  console.log(response.data)
 		} catch (error) {
 		  console.error('Error al obtener datos de la API:', error);
-		} finally {
-		  setIsLoading(false);
 		}
 	  };
+	  	const ObtenerBibliografia = async () => {
+			try {
+				const response = await axios.get(`${BASE_URL}/BibliografiasList/Necesidades`);
+				console.log(`${BASE_URL}/BibliografiasList/Necesidades`)
+				setDatosBibliografia(response.data);
+				console.log(response.data)
+			} catch (error) {
+				console.error('Error al obtener datos de la API:', error);
+			}
+		};
 	  const mostrarOcultarInformacion = () => {
 		setMostrarInformacion(!mostrarInformacion);
 	  };
@@ -62,9 +74,16 @@ const DesNecesidades = ({route}) => {
 		setResultCuidados(resultrCuidados);
 		setMostrarInformacionCuidados(!mostrarInformacionCuidados);
 	  };
+	  const mostrarOcultarBiblio = () => {
+		let resultAfecciones = "";
+		Object.entries(datosBibliografia.Bibliografias).forEach(([afeccion, descripcion]) => {
+            console.log(`${afeccion}: ${descripcion}`);
+            resultAfecciones = resultAfecciones+`${afeccion}: ${descripcion}`+"\n";
+          });
+		setResultBiblio(resultAfecciones);
+		setMostrarInformacionBiblio(!mostrarInformacionBiblio);
+	  };
 	  transformarAfecciones= () =>{
-
-		
 	  }
   	return (
 		<View style={styles.containerDev}>
@@ -122,9 +141,18 @@ const DesNecesidades = ({route}) => {
 								}
 							</View>
 					</TouchableOpacity>
-					<TouchableOpacity
+					<TouchableOpacity onPress={mostrarOcultarBiblio}
 						style={styles.colorBtn} >
 							<Text style={styles.colorTxtBtn}>Bibliografia Relacionada</Text>
+							<View>
+								{
+									mostrarInformacionBiblio && (
+										<>
+										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultadosBiblio}</Text>
+										</>
+									)
+								}
+							</View>
 					</TouchableOpacity>
 				</View>
 			</ScrollView>

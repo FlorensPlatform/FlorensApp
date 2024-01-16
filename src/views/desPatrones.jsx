@@ -8,15 +8,18 @@ import styles from "../styles/stylesPatrones";
 import { AuthContext } from "../../context/AuthContext";
 const DesPatrones = ({route}) => {
 	const [data, setData] = useState([]);
+	const [datosBibliografia, setDatosBibliografia] = useState([]);
 	const navigation = useNavigation();
 	const {Document} = route.params;
 	const {Id} = route.params;
 	const [mostrarInformacionResultados, setMostrarInformacionResultados] = useState(false);
 	const [mostrarInformacionValorar, setMostrarInformacionValorar] = useState(false);
 	const [mostrarInformacionPatron, setMostrarInformacionPatron] = useState(false);
+	const [mostrarInformacionBiblio, setMostrarInformacionBiblio] = useState(false);
 	const [resultValorar, setResultValorar] = useState("");
 	const [resultResultados, setResultResultados] = useState("");
 	const [resultPatron, setResultPatron] = useState("");
+	const [resultadosBiblio, setResultBiblio] = useState("");
 	const {checkUserAuthentication} = useContext(AuthContext);
 	useEffect(() => {
 		checkUserAuthentication();
@@ -24,10 +27,11 @@ const DesPatrones = ({route}) => {
 			checkUserAuthentication();
 		}, 2000); 
 		fetchData();
+		ObtenerBibliografia();
 		return () => clearInterval(intervalId);
 	}, []);
 	
-	  const fetchData = async () => {
+	const fetchData = async () => {
 		try {
 			console.log(Document);
 		  const response = await axios.post(`${BASE_URL}/DocPatronesInfo`, {
@@ -38,8 +42,15 @@ const DesPatrones = ({route}) => {
 		  console.log(response.data)
 		} catch (error) {
 		  console.error('Error al obtener datos de la API:', error);
-		} finally {
-		  setIsLoading(false);
+		}
+	};
+	const ObtenerBibliografia = async () => {
+		try {
+			const response = await axios.get(`${BASE_URL}/BibliografiasList/Patrones`);
+			setDatosBibliografia(response.data);
+			console.log(response.data)
+		} catch (error) {
+			console.error('Error al obtener datos de la API:', error);
 		}
 	};
 	const mostrarOcultarValorar = () => {
@@ -66,6 +77,15 @@ const DesPatrones = ({route}) => {
 		setResultPatron(resultValorar);
 		setMostrarInformacionPatron(!mostrarInformacionPatron);
 	};
+	const mostrarOcultarBiblio = () => {
+		let resultAfecciones = "";
+		Object.entries(datosBibliografia.Bibliografias).forEach(([afeccion, descripcion]) => {
+            console.log(`${afeccion}: ${descripcion}`);
+            resultAfecciones = resultAfecciones+`${afeccion}: ${descripcion}`+"\n";
+          });
+		setResultBiblio(resultAfecciones);
+		setMostrarInformacionBiblio(!mostrarInformacionBiblio);
+	  };
 	transformarAfecciones= () =>{
 
 		
@@ -127,9 +147,18 @@ const DesPatrones = ({route}) => {
 								}
 							</View>
 					</TouchableOpacity>
-					<TouchableOpacity
+					<TouchableOpacity onPress={mostrarOcultarBiblio}
 						style={styles.colorBtn}>
 							<Text style={styles.colorTxtBtn}>Bibliografia Relacionada</Text>
+							<View>
+								{
+									mostrarInformacionBiblio && (
+										<>
+										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultadosBiblio}</Text>
+										</>
+									)
+								}
+							</View>
 					</TouchableOpacity>
 				</View>
 			</ScrollView>

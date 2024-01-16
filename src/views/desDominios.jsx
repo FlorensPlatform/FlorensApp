@@ -7,14 +7,29 @@ import { AuthContext } from "../../context/AuthContext";
 const DesDominios = () => {
 	const navigation = useNavigation();
 	const {checkUserAuthentication} = useContext(AuthContext);
+	const {datosBibliografia, SetDatosBibliografia} = useContext([]);
 	useEffect(() => {
 		checkUserAuthentication();
 		const intervalId = setInterval(() => {
 			checkUserAuthentication();
 		  }, 2000);
 		fetchData();
+		ObtenerBibliografia();
 		return () => clearInterval(intervalId);
 	}, []);
+
+	const ObtenerBibliografia = async () => {
+		try {
+		  const response = await axios.get(`${BASE_URL}/BibliografiasList/Dominios`);
+		  SetDatosBibliografia(response.data);
+		  console.log(response.data)
+		} catch (error) {
+		  console.error('Error al obtener datos de la API:', error);
+		} finally {
+		  setIsLoading(false);
+		}
+	};
+
 	return (
 	  <View style={styles.container}>
 		  <Spinner />
