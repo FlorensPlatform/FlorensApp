@@ -67,7 +67,7 @@ const ChatScreen = () => {
 
     // Actualizar el estado de los mensajes
     setMessages((prevMessages) => GiftedChat.append(prevMessages,[botMessage,userMessage]));
-    saveMessagesToStorage();
+    saveMessagesToStorage([...messages, botMessage, userMessage]);
   };
 
   const sendUserMessage = async (text) => {
@@ -86,10 +86,10 @@ const ChatScreen = () => {
       throw error;
     }
   };
-  const saveMessagesToStorage = async () => {
+  const saveMessagesToStorage = async (messagesToSave) => {
     try {
       // Guarda los mensajes en AsyncStorage como una cadena JSON
-      await AsyncStorage.setItem('chat_history'+Data, JSON.stringify(messages));
+      await AsyncStorage.setItem('chat_history'+Data, JSON.stringify(messagesToSave));
     } catch (error) {
       console.error('Error al guardar mensajes en AsyncStorage:', error);
     }
