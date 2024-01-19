@@ -5,6 +5,7 @@ import axios from 'axios';
 import { BASE_URL } from '../config';
 import styles from "../styles/stylesPatrones";
 import { AuthContext } from "../../context/AuthContext";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import NetInfo from '@react-native-community/netinfo';
 const DesPatrones = ({route}) => {
 	const [data, setData] = useState([]);

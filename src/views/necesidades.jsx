@@ -5,6 +5,7 @@ import { BASE_URL } from '../config';
 import axios from 'axios';
 import styles from '../styles/stylesNecesidades';
 import { AuthContext } from "../../context/AuthContext";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import NetInfo from '@react-native-community/netinfo';
 const Necesidades = () => {
   const [data, setData] = useState([]);

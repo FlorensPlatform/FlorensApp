@@ -6,6 +6,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 import styles from "../styles/stylesDominios";
 import { AuthContext } from "../../context/AuthContext";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import NetInfo from '@react-native-community/netinfo';
 const Dominios = ({router}) => {
     const [data, setData] = useState([]);
