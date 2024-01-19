@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 import { BASE_URL } from '../config';
 import styles from "../styles/stylesPatrones";
 import { AuthContext } from "../../context/AuthContext";
+import NetInfo from '@react-native-community/netinfo';
 const DesPatrones = ({route}) => {
 	const [data, setData] = useState([]);
 	const [datosBibliografia, setDatosBibliografia] = useState([]);
@@ -21,16 +21,47 @@ const DesPatrones = ({route}) => {
 	const [resultPatron, setResultPatron] = useState("");
 	const [resultadosBiblio, setResultBiblio] = useState("");
 	const {checkUserAuthentication} = useContext(AuthContext);
+	const [isConnected, setIsConnected] = useState(true);
 	useEffect(() => {
 		checkUserAuthentication();
 		const intervalId = setInterval(() => {
 			checkUserAuthentication();
 		}, 2000); 
-		fetchData();
-		ObtenerBibliografia();
-		return () => clearInterval(intervalId);
+		const unsubscribe = NetInfo.addEventListener((state) =>{
+			setIsConnected(state.isConnected);
+			if (state.isConnected) {
+				console.log(state.isConnected);
+				fetchData();
+				ObtenerBibliografia();
+			}else{
+				console.log(state.isConnected);
+				AlmacenInformacion();
+			}
+		});
+		return () =>{
+			clearInterval(intervalId);
+			unsubscribe();
+		};
 	}, []);
 	
+	const AlmacenInformacion = async () =>{
+		try {
+            const Patrones = await AsyncStorage.getItem('AlmacenPatrones'+Id);
+			const userInfo = JSON.parse(Patrones)
+			const Bibliografia = await AsyncStorage.getItem('BibliografiasPatro');
+			const userInfo2 = JSON.parse(Bibliografia)
+            if (Patrones) {
+                setData(userInfo)
+				setDatosBibliografia(userInfo2);
+            } else {
+                fetchData();
+				ObtenerBibliografia();
+            }
+        } catch (error) {
+            console.error('Error al verificar la autenticación:', error);
+        }
+	}
+
 	const fetchData = async () => {
 		try {
 			console.log(Document);
@@ -38,6 +69,7 @@ const DesPatrones = ({route}) => {
 			Name:Document,
 			Document:Id
 		  });
+		  const token = AsyncStorage.setItem('AlmacenPatrones'+Id, JSON.stringify(response.data));
 		  setData(response.data);
 		  console.log(response.data)
 		} catch (error) {
@@ -47,6 +79,7 @@ const DesPatrones = ({route}) => {
 	const ObtenerBibliografia = async () => {
 		try {
 			const response = await axios.get(`${BASE_URL}/BibliografiasList/Patrones`);
+			const token = AsyncStorage.setItem('BibliografiasPatro', JSON.stringify(response.data));
 			setDatosBibliografia(response.data);
 			console.log(response.data)
 		} catch (error) {

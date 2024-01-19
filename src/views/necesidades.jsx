@@ -16,13 +16,26 @@ const Necesidades = () => {
 		const intervalId = setInterval(() => {
 			checkUserAuthentication();
 		}, 2000); 
-    fetchData();
-    return () => clearInterval(intervalId);
+    const unsubscribe = NetInfo.addEventListener((state) =>{
+      setIsConnected(state.isConnected);
+			if (state.isConnected) {
+				console.log(state.isConnected);
+				fetchData();
+			}else{
+				console.log(state.isConnected);
+				AlmacenInformacion();
+			}
+    });
+    return () =>{
+			clearInterval(intervalId);
+			unsubscribe();
+		};
   }, []);
 
   const fetchData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/NecesidadesLista`);
+      const token = AsyncStorage.setItem('Necesidades', JSON.stringify(response.data));
       setData(response.data);
     } catch (error) {
       console.error('Error al obtener datos de la API:', error);
@@ -30,7 +43,19 @@ const Necesidades = () => {
       setIsLoading(false);
     }
   };
-
+  const AlmacenInformacion = async () =>{
+		try {
+      const Necesidades = await AsyncStorage.getItem('Necesidades');
+			const userInfo = JSON.parse(Necesidades)
+        if (Necesidades) {
+            setData(userInfo)
+        } else {
+            fetchData();
+        }
+    } catch (error) {
+        console.error('Error al verificar la autenticación:', error);
+    }
+	}
   const navigation = useNavigation();
  //<Text style={styles.title}>{item.nombre}</Text
   const renderItems = () => {

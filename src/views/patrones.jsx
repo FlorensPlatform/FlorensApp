@@ -2,26 +2,40 @@ import React,  {useContext, useState, useEffect} from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, SafeAreaView,ScrollView  } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { BASE_URL } from '../config';
-import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 import styles from "../styles/stylesPatrones";
 import { AuthContext } from "../../context/AuthContext";
+import NetInfo from '@react-native-community/netinfo';
 const Patrones = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const {checkUserAuthentication} = useContext(AuthContext);
+  const [isConnected, setIsConnected] = useState(true);
   useEffect(() => {
     checkUserAuthentication();
     checkUserAuthentication();
 		const intervalId = setInterval(() => {
 			checkUserAuthentication();
-		}, 2000); 
-    fetchData();
-    return () => clearInterval(intervalId);
+		}, 2000);
+    const unsubscribe = NetInfo.addEventListener((state) =>{
+      setIsConnected(state.isConnected);
+			if (state.isConnected) {
+				console.log(state.isConnected);
+				fetchData();
+			}else{
+				console.log(state.isConnected);
+				AlmacenInformacion();
+			}
+    });
+    return () =>{
+			clearInterval(intervalId);
+			unsubscribe();
+		};
   }, []);
   const fetchData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/PatronesLista`);
+      const token = AsyncStorage.setItem('Patrones', JSON.stringify(response.data));
       setData(response.data);
     } catch (error) {
       console.error('Error al obtener datos de la API:', error);
@@ -29,6 +43,19 @@ const Patrones = () => {
       setIsLoading(false);
     }
   };
+  const AlmacenInformacion = async () =>{
+		try {
+      const Patrones = await AsyncStorage.getItem('Patrones');
+			const userInfo = JSON.parse(Patrones)
+        if (Patrones) {
+            setData(userInfo)
+        } else {
+            fetchData();
+        }
+        } catch (error) {
+            console.error('Error al verificar la autenticación:', error);
+        }
+	}
   const navigation = useNavigation();
   const renderItems = () => {
     return Object.keys(data).map(item => (

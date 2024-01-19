@@ -3,9 +3,11 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'rea
 import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
 import { BASE_URL } from '../config';
-import Spinner from 'react-native-loading-spinner-overlay';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import styles from "../styles/stylesNecesidades"
 import { AuthContext } from "../../context/AuthContext";
+import NetInfo from '@react-native-community/netinfo';
+
 const DesNecesidades = ({route}) => {
 	const [data, setData] = useState([]);
 	const [datosBibliografia, setDatosBibliografia] = useState([]);
@@ -20,71 +22,105 @@ const DesNecesidades = ({route}) => {
 	const [resultadosCuidados, setResultCuidados] = useState("");
 	const [resultadosBiblio, setResultBiblio] = useState("");
 	const {checkUserAuthentication} = useContext(AuthContext);
+	const [isConnected, setIsConnected] = useState(true);
 	useEffect(() => {
 		checkUserAuthentication();
 		const intervalId = setInterval(() => {
 			checkUserAuthentication();
-		}, 2000); 
-		fetchData();
-		ObtenerBibliografia();
-		return () => clearInterval(intervalId);
+		}, 2000);
+		const unsubscribe = NetInfo.addEventListener((state) =>{
+			setIsConnected(state.isConnected);
+			if (state.isConnected) {
+				console.log(state.isConnected);
+				fetchData();
+				ObtenerBibliografia();
+			}else{
+				console.log(state.isConnected);
+				AlmacenInformacion();
+			}
+		});
+		return () =>{
+			clearInterval(intervalId);
+			unsubscribe();
+		};
 	}, []);
 	
-	  const fetchData = async () => {
+	
+	
+	const AlmacenInformacion = async () =>{
+		try {
+            const Necesidades = await AsyncStorage.getItem('AlmacenNecesidades'+Id);
+			const userInfo = JSON.parse(Necesidades)
+			const Bibliografia = await AsyncStorage.getItem('BibliografiasNece');
+			const userInfo2 = JSON.parse(Bibliografia)
+            if (Necesidades) {
+                setData(userInfo)
+				setDatosBibliografia(userInfo2);
+            } else {
+                fetchData();
+				ObtenerBibliografia();
+            }
+        } catch (error) {
+            console.error('Error al verificar la autenticación:', error);
+        }
+	}
+	const fetchData = async () => {
 		try {
 			console.log(Document+Id);
-		  const response = await axios.post(`${BASE_URL}/DocNecesidadesInfo`, {
+			const response = await axios.post(`${BASE_URL}/DocNecesidadesInfo`, {
 			Name:Document,
 			Document:Id
-		  });
-		  setData(response.data);
-		  console.log(response.data)
+			});
+			const token = AsyncStorage.setItem('AlmacenNecesidades'+Id, JSON.stringify(response.data));
+			setData(response.data);
+			//console.log(response.data)
 		} catch (error) {
-		  console.error('Error al obtener datos de la API:', error);
+			console.error('Error al obtener datos de la API:', error);
 		}
-	  };
-	  	const ObtenerBibliografia = async () => {
-			try {
-				const response = await axios.get(`${BASE_URL}/BibliografiasList/Necesidades`);
-				console.log(`${BASE_URL}/BibliografiasList/Necesidades`)
-				setDatosBibliografia(response.data);
-				console.log(response.data)
-			} catch (error) {
-				console.error('Error al obtener datos de la API:', error);
-			}
-		};
-	  const mostrarOcultarInformacion = () => {
-		setMostrarInformacion(!mostrarInformacion);
-	  };
-	  const mostrarOcultarAfecciones = () => {
+	};
+	const ObtenerBibliografia = async () => {
+		try {
+			const response = await axios.get(`${BASE_URL}/BibliografiasList/Necesidades`);
+			//console.log(`${BASE_URL}/BibliografiasList/Necesidades`)
+			const token = AsyncStorage.setItem('BibliografiasNece', JSON.stringify(response.data));
+			setDatosBibliografia(response.data);
+			//console.log(response.data)
+		} catch (error) {
+			console.error('Error al obtener datos de la API:', error);
+		}
+	};
+	const mostrarOcultarInformacion = () => {
+	setMostrarInformacion(!mostrarInformacion);
+	};
+	const mostrarOcultarAfecciones = () => {
 		let resultAfecciones = "";
 		Object.entries(data[0]?.Afecciones).forEach(([afeccion, descripcion]) => {
-            console.log(`${afeccion}: ${descripcion}`);
-            resultAfecciones = resultAfecciones+`${afeccion}: ${descripcion}`+"\n";
-          });
+			//console.log(`${afeccion}: ${descripcion}`);
+			resultAfecciones = resultAfecciones+`${afeccion}: ${descripcion}`+"\n";
+			});
 		setResultAfecciones(resultAfecciones);
 		setMostrarInformacionAfecciones(!mostrarInformacionAfecciones);
-	  };
-	  const mostrarOcultarCuidados = () => {
+	};
+	const mostrarOcultarCuidados = () => {
 		resultrCuidados = "";
-        Object.entries(data[0]?.Cuidados).forEach(([afeccion, descripcion]) => {
-            console.log(`${afeccion}: ${descripcion}`);
-            resultrCuidados = resultrCuidados+`${afeccion}: ${descripcion}`+"\n";
-          });
+		Object.entries(data[0]?.Cuidados).forEach(([afeccion, descripcion]) => {
+			//console.log(`${afeccion}: ${descripcion}`);
+			resultrCuidados = resultrCuidados+`${afeccion}: ${descripcion}`+"\n";
+			});
 		setResultCuidados(resultrCuidados);
 		setMostrarInformacionCuidados(!mostrarInformacionCuidados);
-	  };
-	  const mostrarOcultarBiblio = () => {
+	};
+	const mostrarOcultarBiblio = () => {
 		let resultAfecciones = "";
 		Object.entries(datosBibliografia.Bibliografias).forEach(([afeccion, descripcion]) => {
-            console.log(`${afeccion}: ${descripcion}`);
-            resultAfecciones = resultAfecciones+`${afeccion}: ${descripcion}`+"\n";
-          });
+			//console.log(`${afeccion}: ${descripcion}`);
+			resultAfecciones = resultAfecciones+`${afeccion}: ${descripcion}`+"\n";
+			});
 		setResultBiblio(resultAfecciones);
 		setMostrarInformacionBiblio(!mostrarInformacionBiblio);
-	  };
-	  transformarAfecciones= () =>{
-	  }
+	};
+	transformarAfecciones= () =>{
+	}
   	return (
 		<View style={styles.containerDev}>
 			<ScrollView>
