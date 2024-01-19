@@ -6,24 +6,52 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 import styles from "../styles/stylesDominios";
 import { AuthContext } from "../../context/AuthContext";
+import NetInfo from '@react-native-community/netinfo';
 const Dominios = ({router}) => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const navigation = useNavigation();
     const {checkUserAuthentication} = useContext(AuthContext);
+    const [isConnected, setIsConnected] = useState(true);
     useEffect(() => {
       checkUserAuthentication();
       checkUserAuthentication();
 		  const intervalId = setInterval(() => {
 			checkUserAuthentication();
 		  }, 2000); 
-      fetchData();
-      return () => clearInterval(intervalId);
+      const unsubscribe = NetInfo.addEventListener((state) =>{
+        setIsConnected(state.isConnected);
+        if (state.isConnected) {
+          console.log(state.isConnected);
+          fetchData();
+        }else{
+          console.log(state.isConnected);
+          AlmacenInformacion();
+        }
+      });
+      return () =>{
+        clearInterval(intervalId);
+        unsubscribe();
+      };
     }, []);
-  
+
+    const AlmacenInformacion = async () =>{
+      try {
+        const Necesidades = await AsyncStorage.getItem('Dominios');
+        const userInfo = JSON.parse(Necesidades)
+          if (Necesidades) {
+              setData(userInfo)
+          } else {
+              fetchData();
+          }
+      } catch (error) {
+          console.error('Error al verificar la autenticación:', error);
+      }
+    }
     const fetchData = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/DominiosLista`);
+        const token = AsyncStorage.setItem('Dominios', JSON.stringify(response.data));
         setData(response.data);
       } catch (error) {
         console.error('Error al obtener datos de la API:', error);

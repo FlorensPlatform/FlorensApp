@@ -2,14 +2,15 @@ import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { BASE_URL } from '../config';
-import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 import styles from '../styles/stylesNecesidades';
 import { AuthContext } from "../../context/AuthContext";
+import NetInfo from '@react-native-community/netinfo';
 const Necesidades = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const {checkUserAuthentication} = useContext(AuthContext);
+  const [isConnected, setIsConnected] = useState(true);
   useEffect(() => {
     checkUserAuthentication();
     checkUserAuthentication();
