@@ -89,7 +89,7 @@ const DesPatrones = ({route}) => {
 	};
 	const mostrarOcultarValorar = () => {
 		let resultValorar = "";
-		Object.entries(data[0]?.["Que Valora"]).forEach(([afeccion, descripcion]) => {
+		Object.entries(data[0]?.["Valoraciones"]).forEach(([afeccion, descripcion]) => {
             resultValorar = resultValorar+`${afeccion}: ${descripcion}`+"\n";
           });
 		setResultValorar(resultValorar);
@@ -105,7 +105,7 @@ const DesPatrones = ({route}) => {
 	};
 	const mostrarOcultarPatrones = () => {
 		let resultValorar = "";
-		Object.entries(data[0]?.["Alteraciones del Patron"]).forEach(([afeccion, descripcion]) => {
+		Object.entries(data[0]?.["Alteraciones"]).forEach(([afeccion, descripcion]) => {
             resultValorar = resultValorar+`${afeccion}: ${descripcion}`+"\n";
           });
 		setResultPatron(resultValorar);

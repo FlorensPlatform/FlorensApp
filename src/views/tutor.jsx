@@ -12,18 +12,21 @@ const ChatScreen = () => {
   const {checkUserAuthentication} = useContext(AuthContext);
   useEffect(() => {
     checkUserAuthentication();
+    loadInitialMessages();
     const intervalId = setInterval(() => {
       checkUserAuthentication();
     }, 2000); 
-    loadInitialMessages();
+    
     return () => clearInterval(intervalId);
   }, []);
 
   const loadInitialMessages = async () => {
-    const storedMessages = await AsyncStorage.getItem('userData');
-    setData(storedMessages.usuario);
+    const stored = await AsyncStorage.getItem('userData');
+    const userData = JSON.parse(stored);
+    setData(userData.usuario);
+    console.log(Data);
     try {
-      const storedMessages = await AsyncStorage.getItem('chat_history'+Data);
+      const storedMessages = await AsyncStorage.getItem('chat_history'+userData.usuario);
 
       if (storedMessages) {
         // Si hay mensajes almacenados
@@ -89,7 +92,8 @@ const ChatScreen = () => {
   const saveMessagesToStorage = async (messagesToSave) => {
     try {
       // Guarda los mensajes en AsyncStorage como una cadena JSON
-      await AsyncStorage.setItem('chat_history'+Data, JSON.stringify(messagesToSave));
+      const valor = AsyncStorage.setItem('chat_history'+Data, JSON.stringify(messagesToSave));
+      console.log(valor);
     } catch (error) {
       console.error('Error al guardar mensajes en AsyncStorage:', error);
     }
