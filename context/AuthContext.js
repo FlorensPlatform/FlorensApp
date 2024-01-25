@@ -27,10 +27,18 @@ function useCounter() {
       ]
   )};
 
-  function createTwoButtonAlertRegistro (){
+  function createTwoButtonAlertRegistro (mensaje){
     Alert.alert(
       "Campos Inválidos",
-      "Los credenciales están vacíos o son incorrectos",
+      mensaje,
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+  )};
+  function createRegistro (mensaje){
+    Alert.alert(
+      "Cuenta Creada",
+      mensaje,
       [
         { text: "OK", onPress: () => console.log("OK Pressed") }
       ]
@@ -44,6 +52,17 @@ export const AuthProvider = ({children}) => {
     // Registro
     const register = (nombre, pais, ciudad, email, universidad, password) =>{
         setIsLoading(true);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            createTwoButtonAlertRegistro("Correo electrónico inválido");
+            setIsLoading(false);
+            return;
+        }
+        if (password.length < 8) {
+            createTwoButtonAlertRegistro("La contraseña debe tener al menos 8 caracteres");
+            setIsLoading(false);
+            return;
+          }
         axios.post(`${BASE_URL}/Registro`,{
             nombre, pais, ciudad, email, universidad, password, rol:"usuario"
         }).then(res => {
@@ -53,10 +72,11 @@ export const AuthProvider = ({children}) => {
             setIsLoading(false);
             if (usuario!=null){
                 console.log("mi usuario", usuario);
+                createRegistro("Tu usuario se a registrado con éxito");
                 RootNavigation.navigate('Login');
             }
         }).catch(e =>{
-            createTwoButtonAlertRegistro();
+            createTwoButtonAlertRegistro("Los credenciales están vacíos o son incorrectos");
             console.log(`error en registro ${e}`);
             setIsLoading(false);
         })

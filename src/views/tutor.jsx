@@ -64,7 +64,7 @@ const ChatScreen = () => {
       user: {
         _id: 2,
         name: 'Asistente',
-        avatar: 'https://lh3.googleusercontent.com/ogw/ANLem4anf8RVn1mOTxOoo3fB8lyB2aU2vVSUV2tpBWRZNDg=s32-c-mo',
+        avatar: 'https://i.pinimg.com/236x/cd/d0/98/cdd098f38ca5c29c2fd88936e3339004.jpg',
       },
     };
 
