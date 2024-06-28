@@ -4,10 +4,10 @@
     "slug": "FlorensApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo1.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo1.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/logo1.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.marjancs11.FlorensApp"
@@ -29,7 +29,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "b7309b90-1ad9-4035-aac3-9195c921bc60"
+        "projectId": "cb080cd6-39bb-4c5c-aa08-e3ec90a31782"
       }
     }
   }
