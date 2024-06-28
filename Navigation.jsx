@@ -23,7 +23,7 @@ const Navigation = () => {
   return (
     <NavigationContainer ref={navigationRef}>      
       <Stack.Navigator 
-        initialRouteName="Contenido" 
+        initialRouteName="Login" 
         screenOptions={{
           headerMode: 'screen',
           headerTintColor: 'White',
