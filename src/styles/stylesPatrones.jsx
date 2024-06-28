@@ -62,13 +62,9 @@ const styles = StyleSheet.create({
     
     //estilos descripcion de patrones
     Contenedor:{
-		marginRight:100,
-		marginLeft:-80
 	},
     containerDev: {
 		backgroundColor: "#FFFFFF",
-        alignItems: 'center',
-		justifyContent: 'center',
 		flex:1
 	},
     anotherImageDev: {
@@ -103,7 +99,7 @@ const styles = StyleSheet.create({
         borderColor: '#EAAB00',
         backgroundColor: '#EAAB00',
         padding: 10,
-        marginLeft: 90,
+        marginHorizontal: 30,
         borderRadius: 10,
         paddingLeft:40,
         paddingRight:40

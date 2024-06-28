@@ -20,12 +20,10 @@ import DesPatronesScreen from "./src/views/desPatrones";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Navigation = () => {
-const {isLoading, closeSession} = useContext(AuthContext);
-
   return (
     <NavigationContainer ref={navigationRef}>      
       <Stack.Navigator 
-        initialRouteName="Login" 
+        initialRouteName="Contenido" 
         screenOptions={{
           headerMode: 'screen',
           headerTintColor: 'White',
@@ -33,8 +31,6 @@ const {isLoading, closeSession} = useContext(AuthContext);
           headerTitle: () => <CustomHeader />
         }}
       >
-        <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
-        <Stack.Screen name="Registro" component={RegisScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Contenido" component={ContenidoScreen} options={{headerShown:false}}/>
 
         <Stack.Screen name="Necesidades" component={TabNavigator} initialParams={{ screen: "Necesidades" }}/>

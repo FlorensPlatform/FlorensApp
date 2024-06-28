@@ -1,127 +1,186 @@
 import React, { useContext, useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image,ScrollView } from 'react-native';
+import axios from 'axios';
+import { BASE_URL } from '../config';
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import Spinner from 'react-native-loading-spinner-overlay';
+import styles from "../styles/stylesNecesidades"
 import { AuthContext } from "../../context/AuthContext";
+import NetInfo from '@react-native-community/netinfo';
 
-const DesDominios = () => {
+
+const DesDominios = ({route}) => {
+	const [data, setData] = useState([]);
+	const [clases, setClases] = useState([]);
+	const [visibleItems, setVisibleItems] = useState({});
+	const {Document} = route.params;
+	const {Id} = route.params;
 	const navigation = useNavigation();
 	const {checkUserAuthentication} = useContext(AuthContext);
-	const {datosBibliografia, SetDatosBibliografia} = useContext([]);
+	const [datosBibliografia, setDatosBibliografia] = useState([]);
+	const [isConnected, setIsConnected] = useState(true);
+	const [resultadosBiblio, setResultBiblio] = useState("");
+	const [resultadosDiagnostico, setResultDiagnostico] = useState("");
+	const [mostrarInformacionBiblio, setMostrarInformacionBiblio] = useState(false);
+	const [mostrarInformacion, setMostrarInformacion] = useState(false);
 	useEffect(() => {
 		checkUserAuthentication();
 		const intervalId = setInterval(() => {
 			checkUserAuthentication();
 		  }, 2000);
-		fetchData();
-		ObtenerBibliografia();
-		return () => clearInterval(intervalId);
+		  const unsubscribe = NetInfo.addEventListener((state) =>{
+			setIsConnected(state.isConnected);
+			if (state.isConnected) {
+				console.log(state.isConnected);
+				fetchData();
+				ObtenerBibliografia();
+			}else{
+				console.log(state.isConnected);
+				AlmacenInformacion();
+			}
+		});
+		return () =>{
+			clearInterval(intervalId);
+			unsubscribe();
+		};
 	}, []);
-
+	const AlmacenInformacion = async () =>{
+		try {
+            const Dominios = await AsyncStorage.getItem('AlmacenDominios'+Id);
+			const userInfo = JSON.parse(Dominios)
+			const Bibliografia = await AsyncStorage.getItem('BibliografiasNece');
+			const userInfo2 = JSON.parse(Bibliografia)
+            if (Necesidades) {
+                setData(userInfo)
+				setDatosBibliografia(userInfo2);
+            } else {
+                fetchData();
+				ObtenerBibliografia();
+            }
+        } catch (error) {
+            console.error('Error al verificar la autenticación:', error);
+        }
+	}
 	const ObtenerBibliografia = async () => {
 		try {
 		  const response = await axios.get(`${BASE_URL}/BibliografiasList/Dominios`);
-		  SetDatosBibliografia(response.data);
-		  console.log(response.data)
+		  setDatosBibliografia(response.data);
+		  //console.log(response.data)
 		} catch (error) {
 		  console.error('Error al obtener datos de la API:', error);
 		} finally {
-		  setIsLoading(false);
 		}
 	};
-
+	const fetchData = async () => {
+		try {
+			console.log(Document+Id);
+			const response = await axios.post(`${BASE_URL}/DocDominiosInfo`, {
+			Name:Document,
+			Document:Id
+			});
+			const token = AsyncStorage.setItem('AlmacenDominios'+Id, JSON.stringify(response.data));
+			setData(response.data);
+			setClases(response.data[0].Clases);
+			//console.log(response.data[0].Clases)
+		} catch (error) {
+			console.error('Error al obtener datos de la API:', error);
+		}
+	};
+	const mostrarOcultarBiblio = () => {
+		let resultAfecciones = "";
+		Object.entries(datosBibliografia.Bibliografias).forEach(([afeccion, descripcion]) => {
+			//console.log(`${afeccion}: ${descripcion}`);
+			resultAfecciones = resultAfecciones+`${afeccion}: ${descripcion}`+"\n";
+			});
+		setResultBiblio(resultAfecciones);
+		setMostrarInformacionBiblio(!mostrarInformacionBiblio);
+	};
+	const mostrar = (Diagnosticos) => {
+		let resultAfecciones = "";
+		Object.entries(Diagnosticos).forEach(([afeccion, descripcion]) => {
+			resultAfecciones = resultAfecciones+`${descripcion}`+"\n";
+		});
+		setResultDiagnostico(resultAfecciones);
+	};
+	const mostrarOcultar = () => {
+		setMostrarInformacion(!mostrarInformacion);
+	};
+	const toggleVisibility = (index) => {
+        setVisibleItems(prevState => ({
+            ...prevState,
+            [index]: !prevState[index]
+        }));
+    };
+	const InfoClases=()=>{
+        return(
+            <View >
+				{
+					clases.map((item,index)=>(
+						<View key={index}>
+							<TouchableOpacity 
+								style={styles.colorBtn}
+								onPress={() => {toggleVisibility(index);mostrar(item.Diagnosticos)}}>
+								<Text style={[styles.colorTxtBtn,{marginBottom:5}]}>{item.Clase}</Text>
+								{visibleItems[index] && (
+									<Text style={styles.infoText}>{item.Descripcion}</Text>
+								)}
+							</TouchableOpacity>
+							{visibleItems[index] && (
+								<View >
+									<View style={styles.infoContainer}>
+										<Text style={[styles.infoText,{fontSize:20, marginBottom:5}]}>Diagnosticos:</Text>
+										<Text style={styles.infoText}>{resultadosDiagnostico}</Text>
+									</View>
+								</View>
+							)}
+						</View>
+					))
+				}                
+            </View>
+        );
+    }
 	return (
-	  <View style={styles.container}>
-		  <Spinner />
-		  <Text style={styles.textoBien} >Dominios de NANDA</Text>
-		  <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+	  <View style={styles.containerDev}>
+		  <ScrollView>
+			<Text style={styles.textoBien} >Dominios de NANDA</Text>
+			<View style={{ flexDirection: 'row', justifyContent: 'center', padding: 5 }}>
 				<Image
-					source={require('../../img/Nanda.png')}
-					style={{ width: 60, height: 70 }}
+					source={require('../../img/Rectangulo.png')}
+					style={styles.Image}
 				/>
-				<Text style={styles.colorTxtLogo}>1. Promocion de Salud</Text>
+				<Image
+					source={{ uri: data[0]?.Img }}
+					style={styles.anotherImageDev}
+				/>
+					<Text style={styles.colorTxtLogo}>{data[0]?.Titulo}</Text>
+				</View>
+				<Text style={styles.txtArea} >{data[0]?.Definicion}</Text>
+				<View style={styles.Contenedor}>
+				<TouchableOpacity onPress={mostrarOcultar}
+					style={styles.colorBtn}>
+					<Text style={styles.colorTxtBtn}>Clases del dominio</Text>
+				</TouchableOpacity>
+				{
+					mostrarInformacion && (
+						<InfoClases/>
+					)
+				}
+				<TouchableOpacity onPress={mostrarOcultarBiblio}
+					style={styles.colorBtn}>
+					<Text style={styles.colorTxtBtn}>Bibliografías Relacionadas</Text>
+					<View>
+						{
+							mostrarInformacionBiblio && (
+								<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultadosBiblio}</Text>
+							)
+						}
+					</View>
+				</TouchableOpacity>
 			</View>
-			  <Text style={styles.txtArea} >Se refiere a las acciones y prácticas que fomentan el bienestar y la prevención de enfermedades y lesiones en las personas, las familias y las comunidades</Text>
-			<View style={styles.Contenedor}>
-			<TouchableOpacity
-				  style={styles.colorBtn}>
-					  <Text style={styles.colorTxtBtn}>Clases del dominio</Text>
-				  </TouchableOpacity>
-			  <TouchableOpacity
-				  style={styles.colorBtn}>
-					  <Text style={styles.colorTxtBtn}>Clase 1: Toma de conciencia de salud</Text>
-			  </TouchableOpacity>
-			  <TouchableOpacity
-				  style={styles.colorBtn}>
-					  <Text style={styles.colorTxtBtn}>Deficit  de actividades recreativas</Text>
-			  </TouchableOpacity>
-			  <TouchableOpacity
-				  style={styles.colorBtn}>
-					  <Text style={styles.colorTxtBtn}>Caracteristicas</Text>
-			  </TouchableOpacity>
-			  <TouchableOpacity
-				  style={styles.colorBtn}>
-					  <Text style={styles.colorTxtBtn}>Diagnosticos alternativos sugeridos</Text>
-			  </TouchableOpacity>
-			  <TouchableOpacity
-				  style={styles.colorBtn}>
-					  <Text style={styles.colorTxtBtn}>Resultados NOC</Text>
-			  </TouchableOpacity>
-			</View>
+		  </ScrollView>
 	  </View>
 	);
 };
-
-const styles = StyleSheet.create({
-	Contenedor:{
-		marginRight:100,
-		marginLeft:-80
-	},
-  container: {
-	backgroundColor: "#FFFFFF",
-	alignItems: 'center',
-	justifyContent: 'center',
-  },
-  txtArea: {
-	  color: '#003F72',
-	  fontSize: 13,
-	  textAlign: 'left',
-	  fontWeight: 'bold',
-	  marginLeft: 15,
-	  marginRight:10
-  },
-  colorTxtBtn: {
-	  color: '#003F72',
-	  fontSize: 14,
-	  textAlign: 'center',
-	  width: 150,
-	  fontWeight: 'bold',
-  },
-  colorBtn: {
-	marginTop: 40,
-	borderColor: '#EAAB00',
-	backgroundColor: '#EAAB00',
-	padding: 10,
-	marginLeft: 90,
-	borderRadius: 10,
-	paddingLeft:40,
-	paddingRight:40
-  },
-  colorTxtLogo: {
-	color: '#003F72',
-	fontSize: 15,
-	textAlign: 'center',
-	fontWeight: 'bold',
-	marginTop:20,
-	marginLeft: 40
-  },
-  textoBien:{
-	color: '#003F72',
-	fontSize: 15,
-	textAlign: 'center',
-	fontWeight: 'bold',
-	padding: 20
-  }
-});
 
 export default DesDominios;

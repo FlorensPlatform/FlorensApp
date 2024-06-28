@@ -62,13 +62,10 @@ const styles = StyleSheet.create({
     
     //estilos descripcion de necesidades
     Contenedor:{
-		marginRight:100,
-		marginLeft:-80
+		
 	},
     containerDev: {
 		backgroundColor: "#FFFFFF",
-        alignItems: 'center',
-		justifyContent: 'center',
 		flex:1
 	},
     anotherImageDev: {
@@ -78,17 +75,17 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: '40%',  
         left: '48%', 
-        transform: [{ translateX: -105.5 }, { translateY: -15.5 }],
+        transform: [{ translateX: -45.5 }, { translateY: -15.5 }],
         borderRadius: 10, 
 
     },
     txtArea: {
+        flex:1,
         color: '#003F72',
         fontSize: 18,
         textAlign: 'justify',
         fontWeight: 'bold',
-        marginLeft: 15,
-        marginRight:10
+        marginHorizontal:15
     },
     colorTxtBtn: {
         color: '#003F72',
@@ -103,10 +100,8 @@ const styles = StyleSheet.create({
         borderColor: '#EAAB00',
         backgroundColor: '#EAAB00',
         padding: 10,
-        marginLeft: 90,
+        marginHorizontal: 30,
         borderRadius: 10,
-        paddingLeft:40,
-        paddingRight:40
     },
     colorTxtLogo: {
         color: '#003F72',
@@ -115,6 +110,23 @@ const styles = StyleSheet.create({
         marginTop:20,
         left: 20,
     },
+    //
+    infoContainer:{
+        borderColor: '#EAAB00',
+        backgroundColor: '#EAAB00',
+        padding:5,
+        marginTop:15,
+        marginHorizontal:40,
+        borderRadius: 10,
+        borderBottomStartRadius: 10,
+        flex:1,
+    },
+    infoText:{
+        flex:1,
+        color: '#003F72',
+        fontSize: 15,
+        fontWeight: 'bold',
+    }
 });
 
 export default styles;

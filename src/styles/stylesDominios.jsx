@@ -66,8 +66,6 @@ const styles = StyleSheet.create({
 	},
     containerDev: {
 		backgroundColor: "#FFFFFF",
-        alignItems: 'center',
-		justifyContent: 'center',
 		flex:1
 	},
     anotherImageDev: {
