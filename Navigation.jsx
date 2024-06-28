@@ -31,6 +31,8 @@ const Navigation = () => {
           headerTitle: () => <CustomHeader />
         }}
       >
+        <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="Registro" component={RegisScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Contenido" component={ContenidoScreen} options={{headerShown:false}}/>
 
         <Stack.Screen name="Necesidades" component={TabNavigator} initialParams={{ screen: "Necesidades" }}/>
