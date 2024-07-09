@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import styles from "../styles/stylesNecesidades"
 import { AuthContext } from "../../context/AuthContext";
 import NetInfo from '@react-native-community/netinfo';
+import {SlideInFromRight} from '../../Componets/SlideInFromRight'
 
 const DesNecesidades = ({route}) => {
 	const [data, setData] = useState([]);
@@ -125,6 +126,7 @@ const DesNecesidades = ({route}) => {
 		<View style={styles.containerDev}>
 			<ScrollView>
 				<Text style={styles.textoBien} >Necesidades de Virginia Henderson</Text>
+				<SlideInFromRight>
 				<View style={{ flexDirection: 'row', justifyContent: 'center'}}>
 					<Image
 						source={require('../../img/Rectangulo.png')}
@@ -133,8 +135,11 @@ const DesNecesidades = ({route}) => {
 					<Image style={styles.anotherImageDev} source={{ uri: data[0]?.Img }}>
 					</Image>
 				</View>
+				</SlideInFromRight>
+				
 				<Text style={styles.colorTxtLogo}>{Id}. {data[0]?.Titulo}</Text>
 				<Text style={styles.txtArea} >{data[0]?.Definicion}</Text>
+				<SlideInFromRight>
 				<View style={styles.Contenedor}>
 					<TouchableOpacity
 						style={styles.colorBtn} onPress={mostrarOcultarInformacion}>
@@ -191,6 +196,8 @@ const DesNecesidades = ({route}) => {
 							</View>
 					</TouchableOpacity>
 				</View>
+				</SlideInFromRight>
+				
 			</ScrollView>
 		</View>)
 };

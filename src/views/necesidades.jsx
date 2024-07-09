@@ -60,6 +60,7 @@ const Necesidades = () => {
 	}
   const navigation = useNavigation();
  //<Text style={styles.title}>{item.nombre}</Text
+ 
   const renderItems = () => {
     return Object.keys(data).map(item => (
       <TouchableOpacity style={styles.item} key={item} onPress={() => navigation.navigate('DesNecesidades',{Document:data[item].Title, Id:data[item].Id})}>

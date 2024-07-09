@@ -1,15 +1,33 @@
-import react,  {useRef, useEffect} from "react";
-import { Text, View, TouchableOpacity, Image } from 'react-native';
-import { useNavigation } from "@react-navigation/native";
-import Spinner from 'react-native-loading-spinner-overlay';
+import react,  {useRef, useEffect, useState, useCallback} from "react";
+import { Text, View, TouchableOpacity, Image, Animated } from 'react-native';
+import { useNavigation,useFocusEffect } from "@react-navigation/native";
 import styles from '../styles/stylesContenido';
 import {SlideInFromRight} from '../../Componets/SlideInFromRight'
+
+
 const Contenido = ({ route }) => {
 	const navigation = useNavigation();
-  
+  	const [slideAnim] = useState(new Animated.Value(100));
+
+	  useFocusEffect(
+		useCallback(() => {
+		  // Start the animation when the screen is focused
+		  Animated.timing(slideAnim, {
+			toValue: 0,
+			duration: 1000,
+			useNativeDriver: true,
+		  }).start();
+	
+		  return () => {
+			// Reset the animation value when the screen loses focus
+			slideAnim.setValue(100);
+		  };
+		}, [slideAnim])
+	  );
+		
 	return (
 	  <View style={styles.container}>
-		<Spinner />
+		
   
 		<View style={styles.VistaImagenText}>
 		  <Image style={styles.Image}
@@ -17,7 +35,7 @@ const Contenido = ({ route }) => {
 		  />
 		  <Image
 			source={require('../../img/logo.png')}
-			style={{ width: 60, height: 70, top: 20, left: -30 }}
+			 style={{ width: 60, height: 70, top: 20, left: -30 }}
 		  />
 		  <Text style={styles.colorTxtLogo}>Bienvenido a {"\n"} Florens</Text>
 		</View>

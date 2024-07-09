@@ -8,6 +8,7 @@ import styles from "../styles/stylesDominios";
 import { AuthContext } from "../../context/AuthContext";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import NetInfo from '@react-native-community/netinfo';
+import { FadeIn } from "../../Componets/FadeIn";
 const Dominios = ({router}) => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -75,7 +76,8 @@ const Dominios = ({router}) => {
     };
   	return (
       <SafeAreaView style={styles.container}>
-        <ScrollView>
+         <FadeIn>
+         <ScrollView>
           <View style={styles.row}>
                 {renderItems().slice(0, 3)}
             </View>
@@ -92,6 +94,9 @@ const Dominios = ({router}) => {
                 {renderItems().slice(12, 15)}
             </View>
         </ScrollView>  
+
+         </FadeIn>
+        
       </SafeAreaView>
     );
 };

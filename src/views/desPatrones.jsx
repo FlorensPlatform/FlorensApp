@@ -7,6 +7,9 @@ import styles from "../styles/stylesPatrones";
 import { AuthContext } from "../../context/AuthContext";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import NetInfo from '@react-native-community/netinfo';
+import {SlideUp} from '../../Componets/SlideUp'
+
+
 const DesPatrones = ({route}) => {
 	const [data, setData] = useState([]);
 	const [datosBibliografia, setDatosBibliografia] = useState([]);
@@ -128,6 +131,7 @@ const DesPatrones = ({route}) => {
 	  	<View style={styles.containerDev}>
 			<ScrollView>
 				<Text style={styles.textoBien} >Patrones de Marjory Gordon</Text>
+				<SlideUp>	
 				<View style={{ flexDirection: 'row', justifyContent: 'center'}}>
 				<Image
 						source={require('../../img/Rectangulo.png')}
@@ -136,8 +140,12 @@ const DesPatrones = ({route}) => {
 					<Image style={styles.anotherImageDev} source={{ uri: data[0]?.Img }}>
 					</Image>
 				</View>
+				</SlideUp>
+				
 				<Text style={styles.colorTxtLogo}>{Id}. {data[0]?.Titulo}</Text>
 				<Text style={styles.txtArea}>{data[0]?.Definicion}</Text>
+
+				<SlideUp>
 				<View style={styles.Contenedor}>
 					<TouchableOpacity
 						style={styles.colorBtn} onPress={mostrarOcultarValorar}>
@@ -195,6 +203,9 @@ const DesPatrones = ({route}) => {
 							</View>
 					</TouchableOpacity>
 				</View>
+
+				</SlideUp>
+				
 			</ScrollView>
 	  </View>
 	);

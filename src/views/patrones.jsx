@@ -7,11 +7,15 @@ import styles from "../styles/stylesPatrones";
 import { AuthContext } from "../../context/AuthContext";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import NetInfo from '@react-native-community/netinfo';
+import {FadeIn} from '../../Componets/FadeIn'
+
+
 const Patrones = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const {checkUserAuthentication} = useContext(AuthContext);
   const [isConnected, setIsConnected] = useState(true);
+
   useEffect(() => {
     checkUserAuthentication();
     checkUserAuthentication();
@@ -58,6 +62,7 @@ const Patrones = () => {
         }
 	}
   const navigation = useNavigation();
+  
   const renderItems = () => {
     return Object.keys(data).map(item => (
       <TouchableOpacity style={styles.item} key={item.id} onPress={() => navigation.navigate('DesPatrones',{Document:data[item].Title, Id:data[item].Id})}>
@@ -71,8 +76,10 @@ const Patrones = () => {
   };
 
   return (
+   
       <SafeAreaView style={styles.container}>
-        <ScrollView>
+        <FadeIn>
+           <ScrollView>
           <View style={styles.row}>
               {renderItems().slice(0, 3)}
           </View>
@@ -85,7 +92,9 @@ const Patrones = () => {
           <View style={styles.row}>
               {renderItems().slice(9, 11)}
           </View>
-        </ScrollView>
+        </ScrollView> 
+        </FadeIn>
+        
       </SafeAreaView>
   );
 };
