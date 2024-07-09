@@ -8,20 +8,12 @@ import styles from '../styles/styles';
 const Login = ({route}) => {
     const navigation = useNavigation();
     //const styles = style();
-    const [chooseData, setchoosedata] = useState("Idioma");
-    const [isModalVisible, setisModalVisible] = useState(false);
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
     const {isLoading, login,checkUserAuthentication} = useContext(AuthContext);
     useEffect(() => {
 		checkUserAuthentication();
 	}, []);
-    const changeModalVisibility = (bool) =>{
-        setisModalVisible(bool)
-    }
-    const setData = (option) => {
-        setchoosedata(option)
-    }
   	return (
         <View style={styles.container}>
             <Spinner />
@@ -73,25 +65,7 @@ const Login = ({route}) => {
                         <Text style={styles.colorTxtBtnRegistro}>Crea una cuenta nueva</Text>
                     </TouchableOpacity>
                 </View>
-          
-          
-          <TouchableOpacity style={styles.btnStar} 
-                onPress = {() => changeModalVisibility(true)} >
-                <Text style={styles.textItem}>
-                    {chooseData}
-                </Text>
-            </TouchableOpacity>
-            <Modal
-                transparent = {true}
-                animationType = "fade"
-                visible = {isModalVisible}
-                nRequestClose={()=> changeModalVisibility(false)}
-            >
-            <ModalPicker
-                changeModalVisibility={changeModalVisibility}
-                setData = {setData}
-            />
-            </Modal> 
+            
             </View>
         </View>
     )

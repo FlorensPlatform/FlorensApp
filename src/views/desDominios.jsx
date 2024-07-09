@@ -3,8 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image,ScrollView } from 'reac
 import axios from 'axios';
 import { BASE_URL } from '../config';
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import Spinner from 'react-native-loading-spinner-overlay';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from "../styles/stylesNecesidades"
 import { AuthContext } from "../../context/AuthContext";
 import NetInfo from '@react-native-community/netinfo';
@@ -144,7 +143,7 @@ const DesDominios = ({route}) => {
 	  <View style={styles.containerDev}>
 		  <ScrollView>
 			<Text style={styles.textoBien} >Dominios de NANDA</Text>
-			<View style={{ flexDirection: 'row', justifyContent: 'center', padding: 5 }}>
+			<View style={{ flexDirection: 'row', justifyContent: 'center'}}>
 				<Image
 					source={require('../../img/Rectangulo.png')}
 					style={styles.Image}
@@ -153,8 +152,9 @@ const DesDominios = ({route}) => {
 					source={{ uri: data[0]?.Img }}
 					style={styles.anotherImageDev}
 				/>
-					<Text style={styles.colorTxtLogo}>{data[0]?.Titulo}</Text>
+					
 				</View>
+				<Text style={styles.colorTxtLogo}>{Id}.{data[0]?.Titulo}</Text>
 				<Text style={styles.txtArea} >{data[0]?.Definicion}</Text>
 				<View style={styles.Contenedor}>
 				<TouchableOpacity onPress={mostrarOcultar}

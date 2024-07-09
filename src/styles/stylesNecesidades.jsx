@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         position: 'absolute',
         top: '40%',  
-        left: '48%', 
+        left: '55%', 
         transform: [{ translateX: -45.5 }, { translateY: -15.5 }],
         borderRadius: 10, 
 
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
         color: '#003F72',
         fontSize: 20,
         fontWeight: 'bold',
-        marginTop:20,
-        left: 20,
+        textAlign:"center",
+        padding:10
     },
     //
     infoContainer:{

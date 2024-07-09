@@ -128,16 +128,16 @@ const DesPatrones = ({route}) => {
 	  	<View style={styles.containerDev}>
 			<ScrollView>
 				<Text style={styles.textoBien} >Patrones de Marjory Gordon</Text>
-				<View style={{ flexDirection: 'row', justifyContent: 'center', padding: 5 }}>
+				<View style={{ flexDirection: 'row', justifyContent: 'center'}}>
 				<Image
 						source={require('../../img/Rectangulo.png')}
 						style={styles.Image}
 					/>
 					<Image style={styles.anotherImageDev} source={{ uri: data[0]?.Img }}>
 					</Image>
-					<Text style={styles.colorTxtLogo}>{data[0]?.Titulo}</Text>
 				</View>
-				<Text style={styles.txtArea} >{data[0]?.Definicion}</Text>
+				<Text style={styles.colorTxtLogo}>{Id}. {data[0]?.Titulo}</Text>
+				<Text style={styles.txtArea}>{data[0]?.Definicion}</Text>
 				<View style={styles.Contenedor}>
 					<TouchableOpacity
 						style={styles.colorBtn} onPress={mostrarOcultarValorar}>
