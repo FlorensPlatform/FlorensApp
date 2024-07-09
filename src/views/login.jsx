@@ -2,7 +2,6 @@ import react,  {useContext, useState,useEffect} from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Modal } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../../context/AuthContext";
-import {ModalPicker} from "../../Componets/ModelPicker"
 import Spinner from 'react-native-loading-spinner-overlay';
 import styles from '../styles/styles';
 const Login = ({route}) => {
