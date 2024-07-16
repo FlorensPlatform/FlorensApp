@@ -4,12 +4,12 @@ const styles = StyleSheet.create({
 	Contenedor:{
 		marginRight:100,
 		marginLeft:-80,
-		paddingTop: 20
 	},
     VistaImagenText:{
         flexDirection: 'row', 
         justifyContent: 'space-between', 
-        padding: 10
+        padding: 10,
+		marginTop:30
     },
 	BotonesContenedor:{
 		flexDirection: 'row', justifyContent: 'space-between', padding: 15
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         flex:1,
 		backgroundColor: "#FFFFFF",
 		alignItems: 'center',
-		justifyContent: 'center',
+		justifyContent: 'flex-start',
 	  },
 	  Image:{
 		width: 180, height: 70, 

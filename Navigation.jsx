@@ -3,7 +3,7 @@ import { Image, View, Text,TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { navigationRef } from './RootNavigation';
+import { navigate, navigationRef } from './RootNavigation';
 import { AuthContext } from "./context/AuthContext";
 
 //views
@@ -98,10 +98,12 @@ const CustomHeader = () => {
         source={require('./img/UTPL1.png')}
         style={{ width: 90, height: 40, marginRight: 45 }}
       />
-      <Image
-        source={require('./img/florens.png')}
-        style={{ width: 40, height: 40, marginRight: 55 }}
-      />
+      <TouchableOpacity onPress={() => navigate('Contenido')}>
+        <Image
+          source={require('./img/florens.png')}
+          style={{ width: 40, height: 40, marginRight: 55 }}
+        />
+      </TouchableOpacity>
       <TouchableOpacity onPress={closeSession}>
         <Image
           source={require('./img/out.png')}

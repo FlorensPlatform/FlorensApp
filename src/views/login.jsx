@@ -38,7 +38,7 @@ const Login = ({route}) => {
                     </View>
                     <TextInput  
                         value={username}
-                        placeholder="Ingrese su Usuario"
+                        placeholder="Ingrese su Correo Electrónico"
                         onChangeText={text => setUsername(text)}
                         />
                 </View>
@@ -49,7 +49,7 @@ const Login = ({route}) => {
                     </View>
                     <TextInput secureTextEntry={true} 
                         value={password}
-                        placeholder="Ingrese su contraseña"
+                        placeholder="Ingrese su Contraseña"
                         onChangeText={text => setPassword(text)}
                         />
                 </View>

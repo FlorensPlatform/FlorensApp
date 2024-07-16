@@ -121,18 +121,15 @@ const DesDominios = ({route}) => {
 								style={styles.colorBtn}
 								onPress={() => {toggleVisibility(index);mostrar(item.Diagnosticos)}}>
 								<Text style={[styles.colorTxtBtn,{marginBottom:5}]}>{item.Clase}</Text>
+								
 								{visibleItems[index] && (
-									<Text style={styles.infoText}>{item.Descripcion}</Text>
-								)}
-							</TouchableOpacity>
-							{visibleItems[index] && (
-								<View >
-									<View style={styles.infoContainer}>
-										<Text style={[styles.infoText,{fontSize:20, marginBottom:5}]}>Diagnosticos:</Text>
+									<View >
+										<Text style={styles.infoText}>{item.Descripcion}</Text>
+										<Text style={[styles.infoText,{fontSize:20, marginBottom:5, marginTop:20}]}>Diagnosticos:</Text>
 										<Text style={styles.infoText}>{resultadosDiagnostico}</Text>
 									</View>
-								</View>
-							)}
+								)}
+							</TouchableOpacity>
 						</View>
 					))
 				}                

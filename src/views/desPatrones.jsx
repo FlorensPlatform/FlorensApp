@@ -123,10 +123,6 @@ const DesPatrones = ({route}) => {
 		setResultBiblio(resultAfecciones);
 		setMostrarInformacionBiblio(!mostrarInformacionBiblio);
 	  };
-	transformarAfecciones= () =>{
-
-		
-	}
 	return (
 	  	<View style={styles.containerDev}>
 			<ScrollView>
@@ -153,10 +149,7 @@ const DesPatrones = ({route}) => {
 							<View>
 								{
 									mostrarInformacionValorar && (
-										transformarAfecciones(),
-										<>
-										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultValorar}</Text>
-										</>
+										<Text style={styles.informacionBtn}>{resultValorar}</Text>
 									)
 								}
 							</View>
@@ -167,10 +160,7 @@ const DesPatrones = ({route}) => {
 							<View>
 								{
 									mostrarInformacionPatron && (
-										transformarAfecciones(),
-										<>
-										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultPatron}</Text>
-										</>
+										<Text style={styles.informacionBtn}>{resultPatron}</Text>
 									)
 								}
 							</View>
@@ -181,10 +171,7 @@ const DesPatrones = ({route}) => {
 							<View>
 								{
 									mostrarInformacionResultados && (
-										transformarAfecciones(),
-										<>
-										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultResultados}</Text>
-										</>
+										<Text style={styles.informacionBtn}>{resultResultados}</Text>
 									)
 								}
 							</View>
@@ -195,9 +182,7 @@ const DesPatrones = ({route}) => {
 							<View>
 								{
 									mostrarInformacionBiblio && (
-										<>
-										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultadosBiblio}</Text>
-										</>
+										<Text style={styles.informacionBtn}>{resultadosBiblio}</Text>
 									)
 								}
 							</View>

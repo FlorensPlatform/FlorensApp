@@ -21,7 +21,7 @@ function useCounter() {
  function createTwoButtonAlert (){
     Alert.alert(
       "Campos Inválidos",
-      "Los credenciales están vacíos o son incorrectos",
+      "Porfavor ingresar correctamente el correo electrónico o contraseña",
       [
         { text: "OK", onPress: () => console.log("OK Pressed") }
       ]

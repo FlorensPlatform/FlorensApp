@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '30%',
         borderColor: '#003F72',
-        margin:5,
+        marginHorizontal:5,
+        marginTop:10
         
     },
     title: {
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         position: 'absolute',
         top: '40%',  
-        left: '55%', 
+        left: '53%', 
         transform: [{ translateX: -45.5 }, { translateY: -15.5 }],
         borderRadius: 10, 
 
@@ -126,6 +127,14 @@ const styles = StyleSheet.create({
         color: '#003F72',
         fontSize: 15,
         fontWeight: 'bold',
+    },
+    informacionBtn: {
+        fontSize: 17, 
+        marginTop: 15, 
+        marginBottom: -25,
+        color: '#003F72', 
+        fontWeight: 'bold', 
+        textAlign: "justify"
     }
 });
 

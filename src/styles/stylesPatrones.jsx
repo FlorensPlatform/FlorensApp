@@ -6,22 +6,22 @@ const styles = StyleSheet.create({
         padding: 16,
         backgroundColor: '#FFFFFF',
     },
-    Image:{
-        width: 60, 
+    Image: {
+        width: 60,
         height: 60,
         resizeMode: 'cover',
         marginRight: 10,
-        padding:43,
+        padding: 43,
     },
     anotherImage: {
-        width: 40, 
-        height: 40, 
+        width: 40,
+        height: 40,
         resizeMode: 'cover',
         position: 'absolute',
-        top: '40%',  
-        left: '47%', 
+        top: '40%',
+        left: '47%',
         transform: [{ translateX: -16.5 }, { translateY: -30.5 }],
-        borderRadius: 10, 
+        borderRadius: 10,
     },
     row: {
         flexDirection: 'row',
@@ -37,8 +37,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '30%',
         borderColor: '#003F72',
-        margin:5,
-        
+        marginHorizontal: 5,
+        marginTop: 10
+
     },
     title: {
         fontSize: 15,
@@ -46,9 +47,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         top: -10,
     },
-    titleNumber:{
+    titleNumber: {
         fontSize: 13,
-        color:"#FFFFFF",
+        color: "#FFFFFF",
         transform: [{ translateX: -2 }, { translateY: -22.5 }],
         fontWeight: 'bold',
     },
@@ -57,25 +58,25 @@ const styles = StyleSheet.create({
         fontSize: 19,
         textAlign: 'center',
         fontWeight: 'bold',
-        padding:10
+        padding: 10
     },
-    
+
     //estilos descripcion de patrones
-    Contenedor:{
-	},
+    Contenedor: {
+    },
     containerDev: {
-		backgroundColor: "#FFFFFF",
-		flex:1
-	},
+        backgroundColor: "#FFFFFF",
+        flex: 1
+    },
     anotherImageDev: {
-        width: 50, 
-        height: 50, 
+        width: 55,
+        height: 50,
         resizeMode: 'cover',
         position: 'absolute',
-        top: '40%',  
-        left: '58%', 
+        top: '40%',
+        left: '57%',
         transform: [{ translateX: -60.5 }, { translateY: -15.5 }],
-        borderRadius: 10, 
+        borderRadius: 10,
 
     },
     txtArea: {
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
         textAlign: 'justify',
         fontWeight: 'bold',
         marginLeft: 15,
-        marginRight:10
+        marginRight: 10
     },
     colorTxtBtn: {
         color: '#003F72',
@@ -101,16 +102,24 @@ const styles = StyleSheet.create({
         padding: 10,
         marginHorizontal: 30,
         borderRadius: 10,
-        paddingLeft:40,
-        paddingRight:40
+        paddingLeft: 40,
+        paddingRight: 40
     },
     colorTxtLogo: {
         color: '#003F72',
         fontSize: 20,
         fontWeight: 'bold',
-        textAlign:"center",
-        padding:10,
+        textAlign: "center",
+        padding: 10,
     },
+    informacionBtn: {
+        fontSize: 17, 
+        marginTop: 15, 
+        marginBottom: -30,
+        color: '#003F72', 
+        fontWeight: 'bold', 
+        textAlign: "justify"
+    }
 });
 
 export default styles;

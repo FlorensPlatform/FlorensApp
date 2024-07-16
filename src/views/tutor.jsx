@@ -5,11 +5,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { BASE_URL } from '../config';
 import { AuthContext } from "../../context/AuthContext";
+import nurseAvatar from '../../img/enfermera.png';
 
 const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
   const [Data, setData] = useState("");
   const {checkUserAuthentication} = useContext(AuthContext);
+
   useEffect(() => {
     checkUserAuthentication();
     loadInitialMessages();
@@ -29,11 +31,9 @@ const ChatScreen = () => {
       const storedMessages = await AsyncStorage.getItem('chat_history'+userData.usuario);
 
       if (storedMessages) {
-        // Si hay mensajes almacenados
         setMessages(JSON.parse(storedMessages));
         console.log(JSON.parse(storedMessages));
       } else {
-        // Si no hay mensajes almacenados
         setMessages([
           {
             _id: 1,
@@ -42,7 +42,7 @@ const ChatScreen = () => {
             user: {
               _id: 2,
               name: 'Asistente',
-              avatar: 'https://lh3.googleusercontent.com/ogw/ANLem4anf8RVn1mOTxOoo3fB8lyB2aU2vVSUV2tpBWRZNDg=s32-c-mo',
+              avatar: nurseAvatar,
             },
           },
         ]);
@@ -54,65 +54,67 @@ const ChatScreen = () => {
 
   const onSend = async (newMessages = []) => {
     const userMessage = newMessages[0];
-    const response = await sendUserMessage(userMessage.text);
 
-    // Obtener la respuesta del servidor y agregarla a los mensajes
-    const botMessage = {
-      _id: Math.random().toString(),
-      text: response.data.Respuesta,
-      createdAt: new Date(),
-      user: {
-        _id: 2,
-        name: 'Asistente',
-        avatar: 'https://i.pinimg.com/236x/cd/d0/98/cdd098f38ca5c29c2fd88936e3339004.jpg',
-      },
-    };
+    // Actualiza los mensajes inmediatamente en la interfaz de usuario
+    setMessages((prevMessages) => GiftedChat.append(prevMessages, userMessage));
+    saveMessagesToStorage([...messages, userMessage]);
 
-    // Actualizar el estado de los mensajes
-    setMessages((prevMessages) => GiftedChat.append(prevMessages,[botMessage,userMessage]));
-    saveMessagesToStorage([...messages, botMessage, userMessage]);
+    try {
+      const response = await sendUserMessage(userMessage.text);
+
+      const botMessage = {
+        _id: Math.random().toString(),
+        text: response.data.Respuesta,
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'Asistente',
+          avatar: nurseAvatar,
+        },
+      };
+
+      // Actualiza los mensajes con la respuesta del servidor
+      setMessages((prevMessages) => GiftedChat.append(prevMessages, botMessage));
+      saveMessagesToStorage([...messages, botMessage]);
+    } catch (error) {
+      console.error('Error al enviar el mensaje:', error);
+    }
   };
 
   const sendUserMessage = async (text) => {
     const data = { text };
 
     try {
-      // Realizar la solicitud POST al servidor con el texto del usuario
       const response = await axios.post(`${BASE_URL}/Chat/Chatbot`, { Mensaje: data });
-
-      // Imprimir la respuesta del servidor (útil para depurar)
       console.log('Respuesta del servidor:', response.data);
-      console.log(messages);
       return response;
     } catch (error) {
       console.error('Error al enviar el mensaje:', error);
       throw error;
     }
   };
+
   const saveMessagesToStorage = async (messagesToSave) => {
     try {
-      // Guarda los mensajes en AsyncStorage como una cadena JSON
-      const valor = AsyncStorage.setItem('chat_history'+Data, JSON.stringify(messagesToSave));
-      console.log(valor);
+      await AsyncStorage.setItem('chat_history'+Data, JSON.stringify(messagesToSave));
     } catch (error) {
       console.error('Error al guardar mensajes en AsyncStorage:', error);
     }
   };
 
-  const renderSend = (props)=>{
+  const renderSend = (props) => {
     return (
-      <Send {... props}>
+      <Send {...props}>
         <View>
-          <Image source={require('../../img/enviar.png')} style={{width: 30, height: 30, marginBottom: 7, marginRight: 8}}>
-          </Image>
+          <Image source={require('../../img/enviar.png')} style={{width: 30, height: 30, marginBottom: 7, marginRight: 8}} />
         </View>
       </Send>
-    )
-  }
+    );
+  };
+
   return (
-    <ImageBackground source={require('../../img/fondo.jpg')} 
-      style={{ flex: 1 }}>
-      <View style={{ flex: 1, backgroundColor: 'transparent'}}>
+    <ImageBackground source={require('../../img/fondo.jpg')} style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: 'transparent' }}>
         <GiftedChat
           messages={messages}
           onSend={(newMessages) => onSend(newMessages)}
@@ -120,7 +122,7 @@ const ChatScreen = () => {
           placeholder="Ingresa una instrucción"
           renderSend={renderSend}
         />
-    </View>
+      </View>
     </ImageBackground>
   );
 };

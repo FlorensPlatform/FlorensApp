@@ -120,8 +120,6 @@ const DesNecesidades = ({route}) => {
 		setResultBiblio(resultAfecciones);
 		setMostrarInformacionBiblio(!mostrarInformacionBiblio);
 	};
-	transformarAfecciones= () =>{
-	}
   	return (
 		<View style={styles.containerDev}>
 			<ScrollView>
@@ -148,7 +146,7 @@ const DesNecesidades = ({route}) => {
 								{
 									mostrarInformacion && (
 										<>
-										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{data[0]?.Objetivo}</Text>
+										<Text style={styles.informacionBtn}>{data[0]?.Objetivo}</Text>
 										</>
 									)
 								}
@@ -160,9 +158,8 @@ const DesNecesidades = ({route}) => {
 							<View>
 								{
 									mostrarInformacionAfecciones && (
-										transformarAfecciones(),
 										<>
-										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultAfecciones}</Text>
+										<Text style={styles.informacionBtn}>{resultAfecciones}</Text>
 										</>
 									)
 								}
@@ -174,9 +171,8 @@ const DesNecesidades = ({route}) => {
 							<View>
 								{
 									mostrarInformacionCuidados && (
-										transformarAfecciones(),
 										<>
-										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultadosCuidados}</Text>
+										<Text style={styles.informacionBtn}>{resultadosCuidados}</Text>
 										</>
 									)
 								}
@@ -189,7 +185,7 @@ const DesNecesidades = ({route}) => {
 								{
 									mostrarInformacionBiblio && (
 										<>
-										<Text style={{ fontSize: 17, marginVertical: 15,color: '#003F72',fontWeight: 'bold',textAlign:"justify",}}>{resultadosBiblio}</Text>
+										<Text style={styles.informacionBtn}>{resultadosBiblio}</Text>
 										</>
 									)
 								}
